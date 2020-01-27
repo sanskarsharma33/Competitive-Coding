@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-#include "../Macro/cpp_for_all.h"
 using namespace std;
 
 //Program to calculate number of inversions available in given array

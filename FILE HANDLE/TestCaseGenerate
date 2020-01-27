@@ -10,12 +10,10 @@ int main()
     #endif
 
 	//This code will be changed according to generation in test-case.
-	/*
-    srand(time(0));
+    /*srand(time(0));
     int r=50000;
 	cout<<"[";
 	for(int i=1;i<r;i++)
 		cout<<i<<",";
-	cout<<r<<"]\n";
-	*/
+	cout<<r<<"]\n";*/
 }

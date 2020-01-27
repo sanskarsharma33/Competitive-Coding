@@ -7,13 +7,13 @@ int main()
 
     #ifndef ONLINE_JUDGE
 	freopen("TESTCASE.txt","r",stdin);
-    freopen("INPUT.txt","w",stdout);
+    	freopen("INPUT.txt","w",stdout);
     #endif
 	
     srand(time(0));
     int r=50000;
-	cout<<"[";
-	for(int i=1;i<r;i++)
-		cout<<i<<",";
-	cout<<r<<"]\n";
+    cout<<"[";
+    for(int i=1;i<r;i++)
+	cout<<i<<",";
+    cout<<r<<"]\n";
 }

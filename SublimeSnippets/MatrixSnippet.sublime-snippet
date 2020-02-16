@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+struct matrix{ll a,b,c,d;matrix(ll p,ll q,ll r,ll s){a=p;b=q;c=r;d=s;}friend matrix operator*(const matrix &X,const matrix &Y)
+{ll p=sum(mul(X.a,Y.a),Mul(X.b,Y.c));ll q=sum(mul(X.a,Y.b),mul(X.b,Y.d));ll r=sum(mul(X.c,Y.a),mul(X.d,Y.c));ll s=sum(mul(X.c,Y.b),mul(X.d,Y.d));return matrix(p,q,r,s);}};
+matrix matrixexpo(matrix m,ll n){matrix ans(1,0,0,1);while(n){if(n&1)ans=ans*m;m=m*m;n>>=1;}return ans;}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cmatrix</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

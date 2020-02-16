@@ -1,9 +1,10 @@
 <snippet>
 	<content><![CDATA[
 /**
-  *  Problem: $1
-  *  Author:  dhruv_gheewala
-  *  ${2:press ctrl + alt + t}
+  *  Problem:  $1
+  *  Platform: $2
+  *  Author:   dhruv_gheewala
+  *  ${3:press ctrl + alt + t}
 **/
 
 #include<bits/stdc++.h>
@@ -44,7 +45,7 @@ template<typename T>inline bool in_range(T a,T l,T r){return (a>=l&&a<=r);}
 template<typename T,typename U>inline istream& operator >>(istream& in,pair<T,U> &a){in>>a.ff>>a.ss;return in;}
 template<typename T>inline istream& operator >>(istream& in,vector<T> &a){for(auto &x : a)in>>x;return in;}
 
-${3://include other}
+${4://include other}
 
 int main()
 {
@@ -55,10 +56,10 @@ int main()
     #endif
     
     fast;
-    ${4://variables}
-    ${5:test
+    ${5://variables}
+    ${6:test
     \{
-        $6
+        $7
     \}}
     return 0;
 }

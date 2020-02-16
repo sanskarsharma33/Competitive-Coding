@@ -3,7 +3,7 @@
 /**
   *  Problem: $1
   *  Author:  dhruv_gheewala
-  *  ${2:press ctrl + shift + t}
+  *  ${2:press ctrl + alt + t}
 **/
 
 #include<bits/stdc++.h>

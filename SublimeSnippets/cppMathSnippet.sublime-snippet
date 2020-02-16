@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+const ll MOD=${1:1E9+7};
+const double PI=2*acos(0.0);
+vi INV_EUCLID((int)1e6+1728,-1);
+
+inline ll mul(ll a,ll b,ll mod=MOD){return ((a%mod)*(b%mod))%mod;}
+inline ll sum(ll a,ll b,ll mod=MOD){return ((a%mod)+(b%mod))%mod;}
+ll power(ll a,ll n,ll mod=LLONG_MAX){ll ans=1;while(n){if(n&1)ans=mul(ans,a,mod);a=mul(a,a,mod);n>>=1;}return ans;}
+
+inline ll mmi_euclid(ll b,ll mod){if(INV_EUCLID[1])return INV_EUCLID[b];INV_EUCLID[1]=1;
+mod--;loop(i,2,mod)INV_EUCLID[i]=(mod-(mod/i)*INV_EUCLID[mod%i]%mod)%mod;mod++;}
+inline ll fmodinv(ll a,ll mod=MOD){return power(a,mod-2,mod);}
+inline ll div(ll a,ll b,ll mod=MOD,bool flag=1){if(flag)return((a%mod)*(fmodinv(b)%mod))%mod;
+else return mul(a,mmi_euclid(b,mod),mod);}
+
+inline ll gcd(ll a,ll b){return __gcd(a,b);}
+inline ll lcm(ll a,ll b,ll mod=MOD){return div(mul(a,b,mod),gcd(a,b));}
+inline long double log(ll num,ll base=10){return log(num)/log(base);}
+#define setprec(a) cout<<fixed<<setprecision(a)
+
+inline ll pow2(int n){return (1LL<<n);}
+inline int digits(ll x){return (floor(log10(x))+1);}
+inline bool isPowerOfTwo(ll x){return (x&&(!(x&(x-1))));}
+ll nCr(int n, int r,ll mod){long long p=1,k=1;if(n-r<r)r=n-r;if(r){while(r){
+p=mul(p,n);k=mul(k,r);long long m=gcd(p,k);p/=m;k/=m;n--;r--;}}else p=1;return p;}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

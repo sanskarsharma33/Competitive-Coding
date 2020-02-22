@@ -1,63 +1,18 @@
 <snippet>
 	<content><![CDATA[
-//faster
-struct matrix{ll a,b,c,d;matrix(){}matrix(ll p,ll q,ll r,ll s){a=p,b=q,c=r,d=s;}
+${1://faster - only for 2 x 2 matrix
+struct matrix{ll a,b,c,d;matrix(){\}matrix(ll p,ll q,ll r,ll s){a=p,b=q,c=r,d=s;\}
 friend matrix operator*(const matrix &X,const matrix &Y){return matrix(sum(mul(X.a,Y.a),mul(X.b,Y.c)),
-sum(mul(X.a,Y.b),mul(X.b,Y.d)),sum(mul(X.c,Y.a),mul(X.d,Y.c)),sum(mul(X.c,Y.b),mul(X.d,Y.d)));}};
-matrix matexpo(matrix m,ll n){matrix ans(1,0,0,1);while(n){if(n&1)ans=ans*m;m=m*m;n>>=1;}return ans;}
+sum(mul(X.a,Y.b),mul(X.b,Y.d)),sum(mul(X.c,Y.a),mul(X.d,Y.c)),sum(mul(X.c,Y.b),mul(X.d,Y.d)));\}\};
+matrix matexpo(matrix m,ll n){matrix ans(1,0,0,1);while(n){if(n&1)ans=ans*m;m=m*m;n>>=1;\}return ans;\}}
 
-//slower
-struct matrix
-{
-    vector<vector<ll>> mat;
-    int row,col;
-    matrix(int n,int m)
-    {
-        row=n;
-        col=m;
-        mat.resize(n);
-        rep(i,n)
-            mat[i].resize(m);
-        rep(i,n)
-        {
-            rep(j,m)
-            {
-                mat[i][j]=0;
-                if(i==j)
-                    mat[i][j]=1;
-            }
-        }
-    }
-    friend matrix operator*(matrix &a,matrix &b)
-    {
-        matrix ans(a.row,b.col);
-        ll tot;
-        rep(i,a.row)
-        {
-            rep(j,b.col)
-            {
-                tot=0;
-                rep(k,a.col)
-                    tot=sum(tot,mul(a.mat[i][k],b.mat[k][j]));
-                ans.mat[i][j]=tot;
-            }
-        }
-        return ans;
-    }
-};
+${2://slower but for all matrices
+struct matrix{vector<vector<ll>> mat;int row,col;
+matrix(int n,int m){row=n;col=m;mat.resize(n);rep(i,n)mat[i].resize(m);rep(i,n){rep(j,m){mat[i][j]=0;if(i==j)
+mat[i][j]=1;\}\}\}friend matrix operator*(matrix &a,matrix &b){matrix ans(a.row,b.col);ll tot;rep(i,a.row){
+rep(j,b.col){tot=0;rep(k,a.col)tot=sum(tot,mul(a.mat[i][k],b.mat[k][j]));ans.mat[i][j]=tot;\}\}return ans;\}\};
+matrix matexpo(matrix a,ll b,int n=2,int m=2){matrix ans(n,m);while(b){if(b&1)ans=ans*a;a=a*a;b>>=1;\}return ans;\}}
 
-matrix matexpo(matrix a,ll b,int n=2,int m=2)
-{
-    matrix ans(n,m);
-    while(b)
-    {
-        if(b&1)
-            ans=ans*a;
-        a=a*a;
-        b>>=1;
-    }
-    return ans;
-}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>cmatrix</tabTrigger>

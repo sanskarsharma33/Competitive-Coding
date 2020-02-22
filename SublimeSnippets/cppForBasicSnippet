@@ -1,11 +1,5 @@
 <snippet>
 	<content><![CDATA[
-/**
-  *  Problem:  $1
-  *  Author:   dhruv_gheewala
-  *  ${2:press ctrl + alt + t}
-**/
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -44,7 +38,7 @@ template<typename T>inline bool in_range(T a,T l,T r){return (a>=l&&a<=r);}
 template<typename T,typename U>inline istream& operator >>(istream& in,pair<T,U> &a){in>>a.ff>>a.ss;return in;}
 template<typename T>inline istream& operator >>(istream& in,vector<T> &a){for(auto &x : a)in>>x;return in;}
 
-${3://include other}
+${1://include other}
 
 int main()
 {
@@ -55,10 +49,10 @@ int main()
     #endif
     
     fast;
-    ${4://variables}
-    ${5:test
+    ${2://variables}
+    ${3:test
     \{
-        $6
+        $4
     \}}
     return 0;
 }

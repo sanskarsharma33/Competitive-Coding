@@ -1,11 +1,5 @@
 <snippet>
 	<content><![CDATA[
-/**
-  *  Problem: $1
-  *  Author:  dhruv_gheewala
-  *  ${2:press ctrl + alt + t}
-**/
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -52,7 +46,7 @@ template<typename T>inline ll simple_xor(T n){int rem=n%4;switch(rem){case 0:ret
 template<typename T>inline ll range_xor(T l,T r){return simple_xor(l-1)^simple_xor(r);}
 template<typename T>bool isPrime(T n){for(T i=2;i*i<=n;i++)if(n%i==0)return 0;return 1;}
 
-${3://include other}
+${1://include other}
 
 int main()
 {
@@ -63,10 +57,10 @@ int main()
     #endif
     
     fast;
-    ${4://variables}
-    ${5:test
+    ${2://variables}
+    ${3:test
     \{
-        $6
+        $4
     \}}
     
     return 0;

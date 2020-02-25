@@ -1,21 +1,21 @@
 <snippet>
 	<content><![CDATA[
-const ll MOD=${1:1E9+7};
+ll MOD=${1:1E9+7};
 const double PI=2*acos(0.0);
-vi INV_EUCLID((int)1e6+1728,-1);
+vi INV_EUCLID((int)1e6+1728,0);
 
 inline ll mul(ll a,ll b,ll mod=MOD){return ((a%mod)*(b%mod))%mod;}
 inline ll sum(ll a,ll b,ll mod=MOD){return ((a%mod)+(b%mod))%mod;}
 ll power(ll a,ll n,ll mod=LLONG_MAX){ll ans=1;while(n){if(n&1)ans=mul(ans,a,mod);a=mul(a,a,mod);n>>=1;}return ans;}
 
-inline ll mmi_euclid(ll b,ll mod){if(INV_EUCLID[1])return INV_EUCLID[b];INV_EUCLID[1]=1;
-mod--;loop(i,2,mod)INV_EUCLID[i]=(mod-(mod/i)*INV_EUCLID[mod%i]%mod)%mod;mod++;}
-inline ll fmodinv(ll a,ll mod=MOD){return power(a,mod-2,mod);}
-inline ll div(ll a,ll b,ll mod=MOD,bool flag=1){if(flag)return((a%mod)*(fmodinv(b)%mod))%mod;
+inline ll mmi_euclid(ll b,ll mod){if(INV_EUCLID[1])return INV_EUCLID[b];INV_EUCLID[1]=1;mod=min(mod-1,(ll)1e6+1727);
+loop(i,2,mod)INV_EUCLID[i]=(mod-(mod/i)*INV_EUCLID[mod%i]%mod)%mod;}
+inline ll fmodinv(ll a,ll mod){return power(a,mod-2,mod);}
+inline ll mdiv(ll a,ll b,ll mod=MOD,bool flag=1){if(flag)return mul(a,fmodinv(b,mod),mod);
 else return mul(a,mmi_euclid(b,mod),mod);}
 
 inline ll gcd(ll a,ll b){return __gcd(a,b);}
-inline ll lcm(ll a,ll b,ll mod=MOD){return div(mul(a,b,mod),gcd(a,b));}
+inline ll lcm(ll a,ll b,ll mod=MOD){return mdiv(mul(a,b,mod),gcd(a,b),mod);}
 inline long double log(ll num,ll base=10){return log(num)/log(base);}
 #define setprec(a) cout<<fixed<<setprecision(a)
 

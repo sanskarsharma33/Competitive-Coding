@@ -9,7 +9,7 @@ inline ll sum(ll a,ll b,ll mod=MOD){return ((a%mod)+(b%mod))%mod;}
 ll power(ll a,ll n,ll mod=LLONG_MAX){ll ans=1;while(n){if(n&1)ans=mul(ans,a,mod);a=mul(a,a,mod);n>>=1;}return ans;}
 
 inline ll mmi_euclid(ll b,ll mod){if(INV_EUCLID[1])return INV_EUCLID[b];INV_EUCLID[1]=1;mod=min(mod-1,(ll)1e6+1727);
-loop(i,2,mod)INV_EUCLID[i]=(mod-(mod/i)*INV_EUCLID[mod%i]%mod)%mod;}
+loop(i,2,mod)INV_EUCLID[i]=(mod-(mod/i)*INV_EUCLID[mod%i]%mod)%mod;return INV_EUCLID[b];}
 inline ll fmodinv(ll a,ll mod){return power(a,mod-2,mod);}
 inline ll mdiv(ll a,ll b,ll mod=MOD,bool flag=1){if(flag)return mul(a,fmodinv(b,mod),mod);
 else return mul(a,mmi_euclid(b,mod),mod);}

@@ -1,7 +1,11 @@
 <snippet>
 	<content><![CDATA[
-#include<bits/stdc++.h>
-using namespace std;
+#if __has_include("debug.h")
+    #include "debug.h"
+#else
+    #include<bits/stdc++.h>
+    using namespace std;
+#endif
 
 #ifndef DHRUV_GHEEWALA
     #define p(str) 42

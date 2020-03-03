@@ -64,8 +64,8 @@ int main()
 
     end_time = std::chrono::high_resolution_clock::now();
     ll elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time-start_time).count();
-    cerr<<"\n\n======\n";
-    cerr<<"Elapsed Time: "<<elapsed_time<<"ms\n";
+    o("\n\n======\n");
+    o("Elapsed Time: "<<elapsed_time<<" ms\n");
 
     return 0;
 }

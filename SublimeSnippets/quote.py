@@ -6,15 +6,62 @@ import random
 from datetime import datetime
 
 quotes = [
+'''/***
+ ** "Learn to forgive the ones who deserve it…and the ones who don’t."
+ **
+***/
+''',
 
 '''/***
- ** " Any fool can write code that a computer can understand. Good programmers write code that humans can understand"
+ ** "Figure out how to distract yourself."
+ **
+***/
+''',
+
+'''/***
+ ** "Be a warrior, not a worrier."
+ **     -- Elizabeth archer
+***/
+''',
+
+'''/***
+ ** "There is only one god and his name is Death, and there is only one thing we say to Death: Not today."
+ **     -- Syrio Forel
+***/
+''',
+
+'''/***
+ ** "Nothing f***s you harder than time."
+ **     -- Ser Davos
+***/
+''',
+
+'''/***
+ ** "Chaos isn't a pit. Chaos is a ladder."
+ **     -- Little Finger
+***/
+''',
+
+'''/***
+ ** "Everything before the word 'but' is horseshit."
+ **     -- Jon snow
+***/
+''',
+
+'''/***
+ ** "A lion doesn't concern himself with the opinion of sheep."
+ **     -- David Hyner
+***/
+''',
+
+'''/***
+ ** " Any fool can write code that a computer can understand. Good programmers write code that humans can understand "
  **     -– Martin Fowler
 ***/
 ''',
 
 '''/***
- ** " Dream is not that which you see while sleeping it is something that does not let you sleep"
+ ** " Dream is not that which you see while sleeping it is something that does not let you sleep "
  ** 	-- A.P.J Abdul Kalam
 ***/
 ''',
@@ -26,7 +73,7 @@ quotes = [
 ''',
 
 '''/***
- ** " Love the life you live. Live the life you love.
+ ** " Love the life you live. Live the life you love. "
  ** 	-- Bob Marley
 ***/
 ''',
@@ -69,7 +116,7 @@ quotes = [
 
 '''/***
  ** " Experience is the name everyone gives to their mistakes. "
- ** 	-– Oscar Wilde
+ ** 	-- Oscar Wilde
 ***/
 ''',
 

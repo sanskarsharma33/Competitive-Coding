@@ -23,10 +23,10 @@ fir=0;out<<x.first<<" : "<<x.second;}out<<"}";ris;}
 dor(ostream &out, const set<T> &a){bool fir=1;out<<"{";for(auto x:a){if(!fir)out<<", ";fir=0;out<<x;}out<<"}";ris;}
 dor(ostream &out, const vector<T> &a){bool fir=1;out<<"[";for(auto x:a){if(!fir)out<<", ";fir=0;out<<x;}out<<"]";ris;}
 
-#define d(...) cline<<"["<<#__VA_ARGS__<<"] : ",debug(__VA_ARGS__)
+#define d(...) cline<<"["<<#__VA_ARGS__<<"] :",debug(__VA_ARGS__)
 void debug(){cerr<<wspc[0];}
 template<typename Head,typename... Tail>
-void debug(Head H, Tail... T){cerr<<H;debug(T...);}
+void debug(Head H, Tail... T){cerr<<" "<<H;debug(T...);}
 
 
 /************ END ************/

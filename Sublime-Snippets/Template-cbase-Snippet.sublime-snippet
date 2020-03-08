@@ -19,14 +19,13 @@ typedef vector<int> vi;
 
 #define fast ios_base::sync_with_stdio(0)
 #define test int __T__=0;cin>>__T__;while(__T__--)
-
 #define nl cout<<'\n'
 #define pb push_back
 #define pop pop_back
 #define all(s) s.begin(),s.end()
 #define ff first
 #define ss second
-template<typename T,typename U>inline bool exist(T cont,U val){return cont.find(val)!=cont.end();}
+#define sort_by(cont,expr) sort(all(cont),[&](const auto &lhs,const auto &rhs){return expr;})
 
 #define rep(i,n) for(int i=0;i<(n);i++)
 #define rrep(i,n) for(int i=(n)-1;i>=0;i--)
@@ -35,7 +34,9 @@ template<typename T,typename U>inline bool exist(T cont,U val){return cont.find(
 
 ll seed;auto random_address=[]{char *p=new char;delete p;return (uint64_t)p;};
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count()*(random_address()|1));
-inline ll rnd(ll l=0,ll r=LLONG_MAX){return uniform_int_distribution<int>(l,r)(rng);}
+inline int rnd(int l=0,int r=INT_MAX){return uniform_int_distribution<int>(l,r)(rng);}
+
+template<typename T,typename U>inline bool exist(T cont,U val){return cont.find(val)!=cont.end();}
 template<typename T>bool isPrime(T n){for(T i=2;i*i<=n;i++)if(n%i==0)return 0;return 1;}
 template<typename TAIL>inline void inp(TAIL& T){cin>>T;}
 template<typename HEAD,typename... TAIL>inline void inp(HEAD &H,TAIL&... T){cin>>H;inp(T...);}

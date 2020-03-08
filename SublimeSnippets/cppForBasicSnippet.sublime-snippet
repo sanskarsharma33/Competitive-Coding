@@ -5,9 +5,7 @@
 #else
     #include<bits/stdc++.h>
     using namespace std;
-#endif
-
-#ifndef DHRUV_GHEEWALA
+    
     #define p(str) 42
     #define o(str) 108
     #define fundri 137
@@ -18,9 +16,6 @@ typedef unsigned int ui;
 typedef long long int ll;
 typedef pair<int,int> pii;
 typedef vector<int> vi;
-
-#define fast ios_base::sync_with_stdio(0)
-#define test int __T__=0;cin>>__T__;while(__T__--)
 
 #define nl cout<<'\n'
 #define pb push_back
@@ -34,13 +29,26 @@ template<typename T,typename U>inline bool exist(T cont,U val){return cont.find(
 #define rrep(i,n) for(int i=(n)-1;i>=0;i--)
 #define loop(i,l,r) for(int i=l;i<=r;i++)
 #define rloop(i,r,l) for(int i=r;i>=l;i--)
+#define iter(cont,it) for(auto it=cont.begin();it!=cont.end();it++)
+#define riter(cont,it) for(auto it=cont.rbegin();it!=cont.rend();it++)
 
-template<typename T>bool isPrime(T n){for(T i=2;i*i<=n;i++)if(n%i==0)return 0;return 1;}
+#define fast ios_base::sync_with_stdio(0)
+#define test int _T=0;cin>>T;while(T_--)
+#define fill(a,b) memset(a,b,sizeof(a))
+
 template<typename TAIL>inline void inp(TAIL& T){cin>>T;}
 template<typename HEAD,typename... TAIL>inline void inp(HEAD &H,TAIL&... T){cin>>H;inp(T...);}
-template<typename T>inline bool in_range(T a,T l,T r){return (a>=l&&a<=r);}
 template<typename T,typename U>inline istream& operator >>(istream& in,pair<T,U> &a){in>>a.ff>>a.ss;return in;}
 template<typename T>inline istream& operator >>(istream& in,vector<T> &a){for(auto &x : a)in>>x;return in;}
+template<typename T>inline void MIN(T& x,T y){if(x>y)x=y;}
+template<typename T>inline void MAX(T& x,T y){if(x<y)x=y;}
+
+ll seed;mt19937_64 rng(seed=chrono::steady_clock::now().time_since_epoch().count());
+inline ll rnd(ll l=0,ll r=LLONG_MAX){return uniform_int_distribution<int>(l,r)(rng);}
+template<typename T>inline bool in_range(T a,T l,T r){return (a>=l&&a<=r);}
+template<typename T>inline ll simple_xor(T n){int rem=n%4;switch(rem){case 0:return n;case 1:return 1;case 2:return n+1;return 0;}}
+template<typename T>inline ll range_xor(T l,T r){return simple_xor(l-1)^simple_xor(r);}
+template<typename T>bool isPrime(T n){for(T i=2;i*i<=n;i++)if(n%i==0)return 0;return 1;}
 
 ${1://include other}
 
@@ -61,7 +69,7 @@ int main()
     \{
         $4
     \}}
-
+    
     end_time = std::chrono::high_resolution_clock::now();
     ll elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time-start_time).count();
     o("\n\n======\n");
@@ -71,7 +79,7 @@ int main()
 }
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>cbasic</tabTrigger>
+	<tabTrigger>call</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.c++</scope>
 </snippet>

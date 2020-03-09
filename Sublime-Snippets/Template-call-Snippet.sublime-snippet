@@ -32,8 +32,9 @@ typedef vector<int> vi;
 #define iter(cont,it) for(auto it=cont.begin();it!=cont.end();it++)
 #define riter(cont,it) for(auto it=cont.rbegin();it!=cont.rend();it++)
 
+const bool testcases = $1;
 #define fast ios_base::sync_with_stdio(0)
-#define test int _T=0;cin>>T;while(T_--)
+#define test int _T=0;if(test-cases)cin>>T;while(T_--)
 #define fill(a,b) memset(a,b,sizeof(a))
 
 template<typename T,typename U>inline bool exist(T cont,U val){return cont.find(val)!=cont.end();}
@@ -53,7 +54,7 @@ template<typename T>inline ll simple_xor(T n){int rem=n%4;switch(rem){case 0:ret
 template<typename T>inline ll range_xor(T l,T r){return simple_xor(l-1)^simple_xor(r);}
 template<typename T>bool isPrime(T n){for(T i=2;i*i<=n;i++)if(n%i==0)return 0;return 1;}
 
-${1://include other}
+${2://include other}
 
 int main()
 {
@@ -67,12 +68,13 @@ int main()
     #endif
     
     fast;
-    ${2://variables}
-    ${3:test
-    \{
-        $4
-        fundri;
-    \}}
+    ${3://variables}
+    test{
+    
+    $4
+    fundri;
+    
+    }
     
     end_time = std::chrono::high_resolution_clock::now();
     ll elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time-start_time).count();

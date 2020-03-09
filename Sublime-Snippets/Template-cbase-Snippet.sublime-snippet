@@ -62,6 +62,7 @@ int main()
     ${3:test
     \{
         $4
+        fundri;
     \}}
 
     end_time = std::chrono::high_resolution_clock::now();

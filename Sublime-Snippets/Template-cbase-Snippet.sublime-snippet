@@ -17,8 +17,9 @@ typedef long long int ll;
 typedef pair<int,int> pii;
 typedef vector<int> vi;
 
+const bool testcases = $1;
 #define fast ios_base::sync_with_stdio(0)
-#define test int __T__=0;cin>>__T__;while(__T__--)
+#define test int __T__=0;if(testcases)cin>>__T__;while(__T__--)
 #define nl cout<<'\n'
 #define pb push_back
 #define pop pop_back
@@ -44,7 +45,7 @@ template<typename T>inline bool in_range(T a,T l,T r){return (a>=l&&a<=r);}
 template<typename T,typename U>inline istream& operator >>(istream& in,pair<T,U> &a){in>>a.ff>>a.ss;return in;}
 template<typename T>inline istream& operator >>(istream& in,vector<T> &a){for(auto &x : a)in>>x;return in;}
 
-${1://include other}
+${2://include other}
 
 int main()
 {
@@ -58,12 +59,13 @@ int main()
     #endif
     
     fast;
-    ${2://variables}
-    ${3:test
-    \{
-        $4
-        fundri;
-    \}}
+    ${3://variables}
+    test{
+    
+    $4
+    fundri;
+    
+    }
 
     end_time = std::chrono::high_resolution_clock::now();
     ll elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time-start_time).count();

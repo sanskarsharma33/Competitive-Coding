@@ -29,9 +29,9 @@ const bool testcases = $1;
 #define sort_by(cont,expr) sort(all(cont),[&](const auto &lhs,const auto &rhs){return expr;})
 
 #define rep(i,n) for(int i=0;i<(n);i++)
-#define rrep(i,n) for(int i=(n)-1;i>=0;i--)
-#define loop(i,l,r) for(int i=l;i<=r;i++)
-#define rloop(i,r,l) for(int i=r;i>=l;i--)
+#define rrep(i,n) for(int i=(n)-1;~i;i--)
+#define loop(i,l,r) for(int i=l;i<r;i++)
+#define rloop(i,r,l) for(int i=r;i>l;i--)
 
 ll seed;auto random_address=[]{char *p=new char;delete p;return (uint64_t)p;};
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count()*(random_address()|1));

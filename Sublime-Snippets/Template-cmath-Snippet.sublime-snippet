@@ -1,29 +1,27 @@
 <snippet>
 	<content><![CDATA[
-ll MOD=${1:1E9+7};
-const double PI=2*acos(0.0);
-vi INV_EUCLID((int)1e6+1728,0);
+const ll MOD = ${1:1E9+7};
+const long double PI = 2*acos(0.0);
+const int MAXI = 1e6+1729;
 
-inline ll mul(ll a,ll b,ll mod=MOD){return ((a%mod)*(b%mod))%mod;}
-inline ll sum(ll a,ll b,ll mod=MOD){return ((a%mod)+(b%mod))%mod;}
-ll power(ll a,ll n,ll mod=LLONG_MAX){ll ans=1;while(n){if(n&1)ans=mul(ans,a,mod);a=mul(a,a,mod);n>>=1;}return ans;}
-
-inline ll mmi_euclid(ll b,ll mod){if(INV_EUCLID[1])return INV_EUCLID[b];INV_EUCLID[1]=1;mod=min(mod-1,(ll)1e6+1727);
-loop(i,2,mod)INV_EUCLID[i]=(mod-(mod/i)*INV_EUCLID[mod%i]%mod)%mod;return INV_EUCLID[b];}
-inline ll fmodinv(ll a,ll mod){return power(a,mod-2,mod);}
-inline ll mdiv(ll a,ll b,ll mod=MOD,bool flag=1){if(flag)return mul(a,fmodinv(b,mod),mod);
-else return mul(a,mmi_euclid(b,mod),mod);}
-
+vi inv(MAXI,-1);
+inline ll mul(ll a,ll b){return ((a%MOD)*(b%MOD))%MOD;}
+inline ll sum(ll a,ll b){return ((a%MOD)+(b%MOD))%MOD;}
+inline ll power(ll a,ll n){ll ans=1;while(n){if(n&1)ans=mul(ans,a);a=mul(a,a);n>>=1;}return ans;}
+inline ll mmi_euclid(ll b){assert(b%MOD);if(~inv[0])return inv[b];inv[1]=1;loop(i,2,MOD)inv[i]=(MOD-(MOD/i)*inv[MOD%i]%MOD)%MOD;return inv[b];}
+inline ll mmi_fermet(ll a){return power(a,MOD-2);}
+inline ll mdiv(ll a,ll b,const bool flag=1){if(flag)return mul(a,mmi_fermet(b));return mul(a,mmi_euclid(b));}
 inline ll gcd(ll a,ll b){return __gcd(a,b);}
-inline ll lcm(ll a,ll b,ll mod=MOD){return mdiv(mul(a,b,mod),gcd(a,b),mod);}
+inline ll lcm(ll a,ll b){return mdiv(mul(a,b),gcd(a,b));}
 inline long double log(ll num,ll base=10){return log(num)/log(base);}
-#define setprec(a) cout<<fixed<<setprecision(a)
+inline ll pow2(int n){return 1LL<n;}
+inline int num_digits(ll x){return floor(log10(x)+1);}
+inline bool isPowerOfTwo(ll x){return x&&(!(x&(x-1)));}
+inline ll nCr(ll n,ll r){ll p,k,m;p=k=1;if(n-r<r)r=n-r;while(r){p=mul(p,n);k=mul(k,r);m=gcd(p,k);p/=m;k/=m;n--;r--;}return p;}
 
-inline ll pow2(int n){return (1LL<<n);}
-inline int digits(ll x){return (floor(log10(x))+1);}
-inline bool isPowerOfTwo(ll x){return (x&&(!(x&(x-1))));}
-ll nCr(int n, int r,ll mod){long long p=1,k=1;if(n-r<r)r=n-r;if(r){while(r){
-p=mul(p,n);k=mul(k,r);long long m=gcd(p,k);p/=m;k/=m;n--;r--;}}else p=1;return p;}
+template<typename T>inline void MIN(T& x,T y){if(x>y)x=y;}
+template<typename T>inline void MAX(T& x,T y){if(x<y)x=y;}
+#define setprec(a) cout<<fixed<<setprecision(a)
 
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

@@ -1,14 +1,15 @@
 <snippet>
 	<content><![CDATA[
+#define DEBUG
 #if __has_include("debug.h")
     #include "debug.h"
 #else
     #include<bits/stdc++.h>
     using namespace std;
-    
-    #define p(str) 42
-    #define o(str) 108
-    #define fundri 137
+
+    #define p(str) 7
+    #define o(str) 42
+    #define fundri 108
     #define d(...) 1729
 #endif
 
@@ -33,15 +34,15 @@ typedef vector<int> vi;
 #define riter(cont,it) for(auto it=cont.rbegin();it!=cont.rend();it++)
 
 const bool testcases = $1;
-#define fast ios_base::sync_with_stdio(0)
-#define test int __T__=0;if(test-cases)cin>>__T__;while(__T__--)
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
+#define test int __T__=1;if(test-cases)cin>>__T__;while(__T__--)
 #define fill(a,b) memset(a,b,sizeof(a))
 
-template<typename T,typename U>inline bool exist(T cont,U val){return cont.find(val)!=cont.end();}
+template<typename T,typename U>inline int exist(T cont,U val){return cont.count(val);}
 template<typename TAIL>inline void inp(TAIL& T){cin>>T;}
 template<typename HEAD,typename... TAIL>inline void inp(HEAD &H,TAIL&... T){cin>>H;inp(T...);}
-template<typename T,typename U>inline istream& operator >>(istream& in,pair<T,U> &a){in>>a.ff>>a.ss;return in;}
-template<typename T>inline istream& operator >>(istream& in,vector<T> &a){for(auto &x : a)in>>x;return in;}
+template<typename T,typename U>inline istream& operator >>(istream &in,pair<T,U> &a){in>>a.ff>>a.ss;return in;}
+template<typename T>inline istream& operator >>(istream &in,vector<T> &a){for(auto &x : a)in>>x;return in;}
 template<typename T>inline void MIN(T& x,T y){if(x>y)x=y;}
 template<typename T>inline void MAX(T& x,T y){if(x<y)x=y;}
 
@@ -72,8 +73,8 @@ int main()
     test{
     
     $4
-    fundri;
     
+    fundri;
     }
     
     end_time = std::chrono::high_resolution_clock::now();

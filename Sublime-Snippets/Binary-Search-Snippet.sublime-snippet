@@ -1,7 +1,7 @@
 <snippet>
 	<content><![CDATA[
-int l=${1:0},r=${2:INT_MAX};
-int m,ans=-1;
+ll l=${1:0},r=${2:INT_MAX};
+ll m,ans=-1;
 while(l<=r)
 {
 	m=l+(r-l)/2;
@@ -12,6 +12,7 @@ while(l<=r)
 	}
 	else r=m-1;
 }
+
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>cbinary</tabTrigger>

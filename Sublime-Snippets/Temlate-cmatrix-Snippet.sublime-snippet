@@ -1,17 +1,68 @@
 <snippet>
 	<content><![CDATA[
 ${1://faster - only for 2 x 2 matrix
-struct matrix{ll a,b,c,d;matrix(){\}matrix(ll p,ll q,ll r,ll s){a=p,b=q,c=r,d=s;\}
-friend matrix operator*(const matrix &X,const matrix &Y){return matrix(sum(mul(X.a,Y.a),mul(X.b,Y.c)),
-sum(mul(X.a,Y.b),mul(X.b,Y.d)),sum(mul(X.c,Y.a),mul(X.d,Y.c)),sum(mul(X.c,Y.b),mul(X.d,Y.d)));\}\};
-matrix matexpo(matrix m,ll n){matrix ans(1,0,0,1);while(n){if(n&1)ans=ans*m;m=m*m;n>>=1;\}return ans;\}}
+struct matrix
+{
+    const int row=2,col=2;
+    ll a,b,c,d;
+    matrix(){a=d=1;b=c=0;\}
+    matrix(ll p,ll q,ll r,ll s){a=p;b=q;c=r;d=s;\}
+    
+    friend matrix operator *(const matrix &l,const matrix &r)
+    {
+        return matrix(sum(mul(l.a,r.a),mul(l.b,r.c)),
+                      sum(mul(l.a,r.b),mul(l.b,r.d)),
+                      sum(mul(l.c,r.a),mul(l.d,r.c)),
+                      sum(mul(l.c,r.b),mul(l.d,r.d)));
+    \}
 
+    friend matrix operator +(const matrix &l,const matrix &r)
+    {
+        return matrix(sum(l.a,l.a),
+                      sum(l.b,r.b),
+                      sum(l.c,r.c),
+                      sum(l.d,r.d));
+    \}
+    
+    friend matrix operator *=(matrix &l,const matrix &r){return l=l*r;\}
+    friend matrix operator +=(matrix &l,const matrix &r){return l=l+r;\}
+\};
+string to_string(const matrix &a){return to_string({{a.a,a.b\},{a.c,a.d\}\});\}}
 ${2://slower but for all matrices
-struct matrix{vector<vector<ll>> mat;int row,col;
-matrix(int n,int m){row=n;col=m;mat.resize(n);rep(i,n)mat[i].resize(m);rep(i,n){rep(j,m){mat[i][j]=0;if(i==j)
-mat[i][j]=1;\}\}\}friend matrix operator*(matrix &a,matrix &b){matrix ans(a.row,b.col);ll tot;rep(i,a.row){
-rep(j,b.col){tot=0;rep(k,a.col)tot=sum(tot,mul(a.mat[i][k],b.mat[k][j]));ans.mat[i][j]=tot;\}\}return ans;\}\};
-matrix matexpo(matrix a,ll b,int n=2){matrix ans(n,n);while(b){if(b&1)ans=ans*a;a=a*a;b>>=1;\}return ans;\}}
+struct matrix
+{
+    vector<vector<ll>> mat;
+    int row,col;
+    matrix(int n,int m,ll val=1)
+    {
+        row=n;col=m;mat.resize(row);
+        rep(i,n){mat[i].resize(col);rep(j,m)mat[i][j]=((i==j)*val);\}
+    \}
+    matrix(const vector<vector<ll>> &a,ll except=0)
+    {
+        row=a.size();col=0;rep(i,row)MAX(col,(int)a[i].size());mat.resize(col);
+        rep(i,row){mat[i].resize(col);int j=0;for(ll x : a[i])mat[i][j++]=x;while(j<col)mat[i][j++]=except;\}
+    \}
+
+    friend matrix operator *(const matrix &l,const matrix &r)
+    {
+        assert(l.col==r.row);matrix ans(l.row,r.col);ll tot;
+        rep(i,l.row){rep(j,r.col){tot=0;rep(k,l.col)tot=sum(tot,mul(l.mat[i][k],r.mat[k][j]));ans.mat[i][j]=tot;\}\}
+        return ans;
+    \}
+
+    friend matrix operator +(const matrix &l,const matrix &r)
+    {
+        assert((l.row==r.row)&&(l.col==r.col));matrix ans(l.row,l.col,0);
+        rep(i,l.row){rep(j,l.col)ans.mat[i][j]=l[i][j]+r[i][j];\}
+        return ans;
+    \}
+
+    friend matrix operator *=(matrix &l,const matrix &r){return l=l*r;\}
+    friend matrix operator +=(matrix &l,const matrix &r){return l=l+r;\}
+\};
+string to_string(const matrix &a){return to_string(a.mat);\}}
+void power(matrix &m,ll n){assert(m.row==m.col);matrix ans(m.row,m.col);while(n){if(n&1)ans*=m;m*=m;n>>=1;}m=ans;};
 
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

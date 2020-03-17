@@ -1,40 +1,12 @@
 <snippet>
 	<content><![CDATA[
-const int MAXN=${1:1e6+1729};
-vi sieve(MAXN,-1);
-void build(int limit=MAXN-1)
-{
-    sieve[0]=sieve[1]=0;
-    for(int i=2;i*i<=limit;i++)
-    {
-        if(sieve[i]==-1)
-        {
-            for(int j=i*i;j<=limit;j+=i)
-            {
-                if(sieve[j]==-1)
-                    sieve[j]=i;
-            }
-        }
-    }
-}
+const int MAXS=${1:1e6+1729};
+vi sieve(MAXS,-1);
 
 bool is_sprime(int num){return sieve[num]==-1;}
+void build(int limit=MAXS){sieve[0]=sieve[1]=0;for(int i=2;i*i<=limit;i++){if(is_sprime(i)){for(int j=i*i;j<limit;j+=i){if(sieve[j]==-1)sieve[j]=i;}}}}
+void sfact(int num,map<int, int> &ans){int n=num;if(num<=1){ans[num]++;return;}while(1){if(is_sprime(n)){ans[n]++;break;}ans[sieve[n]]++;n/=sieve[n];}}
 
-void sfact(int num,map<int, int> &ans)
-{
-    int n=num;
-    if(num<=1){ans[num]++;return;}
-    while(1)
-    {
-        if(sieve[n]==-1)
-        {
-            ans[n]++;
-            break;
-        }
-        ans[sieve[n]]++;
-        n/=sieve[n];
-    }
-}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>csieve</tabTrigger>

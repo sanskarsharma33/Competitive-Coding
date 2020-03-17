@@ -1,14 +1,15 @@
 <snippet>
 	<content><![CDATA[
+#define DEBUG
 #if __has_include("debug.h")
     #include "debug.h"
 #else
     #include<bits/stdc++.h>
     using namespace std;
 
-    #define p(str) 42
-    #define o(str) 108
-    #define fundri 137
+    #define p(str) 7
+    #define o(str) 42
+    #define fundri 108
     #define d(...) 1729
 #endif
 
@@ -18,8 +19,8 @@ typedef pair<int,int> pii;
 typedef vector<int> vi;
 
 const bool testcases = $1;
-#define fast ios_base::sync_with_stdio(0)
-#define test int __T__=0;if(testcases)cin>>__T__;while(__T__--)
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
+#define test int __T__=1;if(testcases)cin>>__T__;while(__T__--)
 #define nl cout<<'\n'
 #define pb push_back
 #define pop pop_back
@@ -61,10 +62,10 @@ int main()
     fast;
     ${3://variables}
     test{
-    
+
     $4
+
     fundri;
-    
     }
 
     end_time = std::chrono::high_resolution_clock::now();

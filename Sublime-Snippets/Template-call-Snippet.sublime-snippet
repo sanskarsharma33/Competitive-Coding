@@ -1,5 +1,5 @@
 <snippet>
-	<content><![CDATA[
+    <content><![CDATA[
 #define DEBUG
 #if __has_include("debug.h")
     #include "debug.h"
@@ -26,10 +26,14 @@ typedef vector<int> vi;
 #define ss second
 #define sort_by(cont,expr) sort(all(cont),[&](const auto &lhs,const auto &rhs){return expr;})
 
-#define rep(i,n) for(int i=0;i<(n);i++)
-#define rrep(i,n) for(int i=(n)-1;~i;i--)
-#define loop(i,l,r) for(int i=l;i<r;i++)
-#define rloop(i,r,l) for(int i=r;i>l;i--)
+// copied macro - start
+template<typename T>struct number_iterator : iterator<random_access_iterator_tag,T>
+{T u;number_iterator(T v): u(v){}operator T&(){return u;}T operator *()const{return u;}};
+template<typename T>struct number_range
+{T l,r;number_range(T b,T e):l(b),r(e){}number_iterator<T> begin(){return l;}number_iterator<T> end(){return r;}};
+template<typename T>number_range<T> range(T e){return number_range<T>(0,e);}
+template<typename T>number_range<T> range(T b,T e){if(b>e)return number_range<T>(-b+1,-e+1);return number_range<T>(b,e);}
+// copied macro - end
 #define iter(cont,it) for(auto it=cont.begin();it!=cont.end();it++)
 #define riter(cont,it) for(auto it=cont.rbegin();it!=cont.rend();it++)
 
@@ -85,8 +89,8 @@ int main()
     return 0;
 }
 ]]></content>
-	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>call</tabTrigger>
-	<!-- Optional: Set a scope to limit where the snippet will trigger -->
-	<scope>source.c++</scope>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>call</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
 </snippet>

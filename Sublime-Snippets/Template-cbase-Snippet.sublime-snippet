@@ -19,14 +19,18 @@ typedef pair<int,int> pii;
 typedef vector<int> vi;
 
 const bool testcases = $1;
-#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
-#define test int __T__=1;if(testcases)cin>>__T__;while(__T__--)
+#define ff first
+#define ss second
 #define nl cout<<'\n'
 #define pb push_back
 #define pop pop_back
+#define sz(cont) cont.size()
 #define all(s) s.begin(),s.end()
-#define ff first
-#define ss second
+#define lb(a,x) lower_bound(all(a),x)
+#define ub(a,x) upper_bound(all(a),x)
+#define test int __T__=1;if(testcases)cin>>__T__;while(__T__--)
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
+#define make_unique(vec) sort(all(vec));vec.erase(unique(all(vec)),vec.end())
 #define sort_by(cont,expr) sort(all(cont),[&](const auto &lhs,const auto &rhs){return expr;})
 
 // copied macro - start
@@ -37,6 +41,11 @@ template<typename T>struct number_range
 template<typename T>number_range<T> range(T e){return number_range<T>(0,e);}
 template<typename T>number_range<T> range(T b,T e){if(b>e)return number_range<T>(-b+1,-e+1);return number_range<T>(b,e);}
 // copied macro - end
+
+#define rep(i,n) for(int i=0;i<n;i++)
+#define loop(i,l,r) for(int i=l;i<r;i++)
+#define rrep(i,n) for(int i=n;~i;i--)
+#define rloop(i,r,l) for(int i=r;i>l;i--)
 
 ll seed;auto random_address=[]{char *p=new char;delete p;return (uint64_t)p;};
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count()*(random_address()|1));

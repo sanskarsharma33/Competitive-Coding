@@ -25,6 +25,7 @@ int find(int x)
     return x;
 }
 
+int size(int x){return abs(parent[find(x)]);}
 // if choice is true it means that b -> a (i.e. a will be parent of both sets)
 void UnIoN(int a,int b,bool choice=0)
 {
@@ -32,13 +33,11 @@ void UnIoN(int a,int b,bool choice=0)
     b=find(b);
     
     if(a==b)return;
-    if(!choice && parent[b]<parent[a])swap(a,b);
+    if(!choice && size(b)<size(a))swap(a,b);
     
     parent[a]+=parent[b];
     parent[b]=a;
 }
-
-int size(int x){return abs(parent[find(x)]);}
 #define union UnIoN
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

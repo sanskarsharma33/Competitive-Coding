@@ -15,15 +15,11 @@ struct dsu
 
     int find(int x)
     {
-        vi util;
-        while(parent[x]>=0)
+        if(parent[x]>=0)
         {
-            util.pb(x);
-            x=parent[x];
+            parent[x]=find(parent[x]);
+            return parent[x];
         }
-
-        for(int &a : util)
-            a=x;
         return x;
     }
     

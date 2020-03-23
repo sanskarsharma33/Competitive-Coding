@@ -1,43 +1,47 @@
 <snippet>
     <content><![CDATA[
-vi parent;
-void build_dsu(int n)
+struct dsu
 {
-    parent.resize(n+1);
-
-    // -1 represents that it, set contains 1 element
-    //  and whose parent is current node
-    for(int i : range(0,n+1))
-        parent[i]=-1;
-}
-
-int find(int x)
-{
-    vi util;
-    while(parent[x]>=0)
+    vi parent;
+    dsu(int n)
     {
-        util.pb(x);
-        x=parent[x];
+        parent.resize(n+1);
+
+        // -1 represents that it, set contains 1 element
+        //  and whose parent is current node
+        for(int i : range(0,n+1))
+            parent[i]=-1;
     }
 
-    for(int &a : util)
-        a=x;
-    return x;
-}
+    int find(int x)
+    {
+        vi util;
+        while(parent[x]>=0)
+        {
+            util.pb(x);
+            x=parent[x];
+        }
 
-int size(int x){return abs(parent[find(x)]);}
-// if choice is true it means that b -> a (i.e. a will be parent of both sets)
-void UnIoN(int a,int b,bool choice=0)
-{
-    a=find(a);
-    b=find(b);
+        for(int &a : util)
+            a=x;
+        return x;
+    }
     
-    if(a==b)return;
-    if(!choice && size(b)<size(a))swap(a,b);
-    
-    parent[a]+=parent[b];
-    parent[b]=a;
-}
+    int size(int x){return abs(parent[find(x)]);}
+
+    // if choice is true it means that b -> a (i.e. a will be parent of both sets)
+    void UnIoN(int a,int b,bool choice=0)
+    {
+        a=find(a);
+        b=find(b);
+        
+        if(a==b)return;
+        if(!choice && size(b)<size(a))swap(a,b);
+        
+        parent[a]+=parent[b];
+        parent[b]=a;
+    }
+};
 #define union UnIoN
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

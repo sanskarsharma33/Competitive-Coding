@@ -1,5 +1,5 @@
 <snippet>
-	<content><![CDATA[
+    <content><![CDATA[
 ${1://faster - only for 2 x 2 matrix
 struct matrix
 {
@@ -27,7 +27,13 @@ struct matrix
     friend matrix operator *=(matrix &l,const matrix &r){return l=l*r;\}
     friend matrix operator +=(matrix &l,const matrix &r){return l=l+r;\}
 \};
-string to_string(const matrix &a){return to_string({{a.a,a.b\},{a.c,a.d\}\});\}}
+string to_string(const matrix &a)
+{
+    #ifdef DEBUG
+        return to_string({{a.a,a.b},{a.c,a.d}});
+    #endif
+        return "";
+\}}
 ${2://slower but for all matrices
 struct matrix
 {
@@ -61,12 +67,18 @@ struct matrix
     friend matrix operator *=(matrix &l,const matrix &r){return l=l*r;\}
     friend matrix operator +=(matrix &l,const matrix &r){return l=l+r;\}
 \};
-string to_string(const matrix &a){return to_string(a.mat);\}}
+string to_string(const matrix &a)
+{
+    #ifdef DEBUG
+        return to_string(a.mat);
+    #endif
+        return "";
+\}}
 void power(matrix &m,ll n){assert(m.row==m.col);matrix ans(m.row,m.col);while(n){if(n&1)ans*=m;m*=m;n>>=1;}m=ans;};
 
 ]]></content>
-	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>cmatrix</tabTrigger>
-	<!-- Optional: Set a scope to limit where the snippet will trigger -->
-	<scope>source.c++</scope>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>cmatrix</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
 </snippet>

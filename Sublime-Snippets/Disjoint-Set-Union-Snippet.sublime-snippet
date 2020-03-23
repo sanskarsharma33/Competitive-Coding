@@ -26,6 +26,13 @@ struct dsu
         return 1;
     }
 };
+string to_string(const dsu &a)
+{
+    #ifdef DEBUG
+        return to_string(a.parent);
+    #endif
+        return "";
+}
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
     <tabTrigger>cdsu</tabTrigger>

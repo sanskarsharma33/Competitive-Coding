@@ -2,43 +2,30 @@
     <content><![CDATA[
 struct dsu
 {
+    // when parent[x]<0 then x is root,
+    // and size of that set is -parent[x]
     vi parent;
-    dsu(int n)
-    {
-        parent.resize(n+1);
+    int no_sets=0;
 
-        // -1 represents that it, set contains 1 element
-        //  and whose parent is current node
-        for(int i : range(0,n+1))
-            parent[i]=-1;
-    }
+    dsu(int n=-1){if(~n)init(n);}
 
-    int find(int x)
-    {
-        if(parent[x]>=0)
-        {
-            parent[x]=find(parent[x]);
-            return parent[x];
-        }
-        return x;
-    }
-    
-    int size(int x){return abs(parent[find(x)]);}
+    void init(int n){parent.assign(n+1,-1);no_sets=n;}
+    int find(int x){return parent[x]<0?x:parent[x]=find(parent[x]);}
+    int size(int x){return -parent[x];}
 
-    // if choice is true it means that b -> a (i.e. a will be parent of both sets)
-    void UnIoN(int a,int b,bool choice=0)
+    // if choice is true it means that y -> x (i.e. 'x' will be parent of both sets)
+    bool merge(int x,int y,bool choice=0)
     {
-        a=find(a);
-        b=find(b);
-        
-        if(a==b)return;
-        if(!choice && size(b)<size(a))swap(a,b);
-        
-        parent[a]+=parent[b];
-        parent[b]=a;
+        x=find(x);
+        y=find(y);
+        if(x==y)return 0;
+        if(choice && size(x)<size(y))swap(x,y);
+        parent[x]+=parent[y];
+        parent[y]=x;
+        no_sets--;
+        return 1;
     }
 };
-#define union UnIoN
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
     <tabTrigger>cdsu</tabTrigger>

@@ -1,0 +1,42 @@
+<snippet>
+	<content><![CDATA[
+struct graph
+{
+    int root,size;
+    vector<set<int>> adj;
+    vector<bool> vis;
+
+    graph(int n=-1){if(~n)init(size=n);}
+
+    void init(int n){adj.resize(n+1);vis.assign(n+1,0);root=1;}
+    
+    void make_edge(int u,int v,bool directed=0)
+    {
+        // assert(in_range(u,1,size) && in_range(v,1,size));
+        adj[u].insert(v);
+        if(!directed)
+            adj[v].insert(u);
+    }
+
+    bool is_edge(int u,int v){
+        // assert(in_range(u,1,size) && in_range(v,1,size));
+        return adj[u].find(v)!=adj[u].end();}
+    // for_each(all(adj[x]),dfs);
+    void dfs(int u){if(!vis[u]){vis[u]=1;for(int v : adj[u])dfs(v);}}
+    
+    bool check_graph_connected_dfs(){vis.assign(size,0);dfs(root);return find(all(vis),0)==vis.end();}
+    
+    // to count the number of connected components in a graph
+    int cc_count()
+    {
+        int cc_count=0;vis.assign(size+1,0);
+        for(int i : range(size)){if(!vis[i+1]){cc_count++;dfs(i+1);}}
+        return cc_count;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cgraph</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

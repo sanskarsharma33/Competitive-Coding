@@ -98,11 +98,14 @@ sim dor const Modular<U> &num){return out<<num();}
 sim>istream& operator>>(istream &in,Modular<U> &n){
 typename common_type<typename Modular<U>::Type,int64_t>::type x;in>>x;n.value=Modular<U>::normalize(x);return in;}
 
-using ModType = ${1:int};
-struct VarMod{static ModType value;};
-ModType VarMod::value;
-${2:ModType& MOD=VarMod::value;}
-using Mint=Modular<VarMod>;
+// using ModType = int;
+// struct VarMod{static ModType value;};
+// ModType VarMod::value;
+// ModType& MOD=VarMod::value;
+// using Mint=Modular<VarMod>;
+
+constexpr int MOD = 998244353;
+using Mint = Modular<integral_constant<decay<decltype(MOD)>::type, MOD>>;
 
 vector<Mint> inv,inv_fact,fact;
 void build_factorial(int maximum=1e6)
@@ -125,10 +128,10 @@ void build_factorial(int maximum=1e6)
     }
 }
 
-Mint choose(ll n,ll r){if(in_range(r,0,n))return fact[n]*inv_fact[r]*inv_fact[n-r];return 0;}
-Mint inv_choose(ll n,ll r){assert(in_range(r,0,n));return inv_fact[n]*fact[r]*fact[n-r];}
-Mint permute(ll n,ll r){if(in_range(r,0,n))return fact[n]*inv_fact[n-r];return 0;}
-Mint inv_permute(ll n,ll r){assert(in_range(r,0,n));return inv_fact[n]*fact[n-k];}
+Mint choose(ll n,ll r){if(in_range(r,0LL,n))return fact[n]*inv_fact[r]*inv_fact[n-r];return 0;}
+Mint inv_choose(ll n,ll r){assert(in_range(r,0LL,n));return inv_fact[n]*fact[r]*fact[n-r];}
+Mint permute(ll n,ll r){if(in_range(r,0LL,n))return fact[n]*inv_fact[n-r];return 0;}
+Mint inv_permute(ll n,ll r){assert(in_range(r,0LL,n));return inv_fact[n]*fact[n-r];}
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
     <tabTrigger>cmodularint</tabTrigger>

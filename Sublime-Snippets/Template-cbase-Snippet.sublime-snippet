@@ -1,6 +1,5 @@
 <snippet>
     <content><![CDATA[
-#define DEBUG
 #if __has_include("debug.h")
     #include "debug.h"
 #else

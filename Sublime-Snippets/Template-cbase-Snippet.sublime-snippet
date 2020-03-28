@@ -12,6 +12,7 @@
     #define d(...) 1729
 #endif
 
+
 typedef unsigned int ui;
 typedef long long int ll;
 typedef pair<int,int> pii;
@@ -20,43 +21,26 @@ typedef vector<int> vi;
 const bool testcases = $1;
 #define ff first
 #define ss second
-#define nl cout<<'\n'
-#define pb push_back
-#define pop pop_back
-#define sz(cont) cont.size()
+#define endl '\n'
 #define all(s) s.begin(),s.end()
-#define lb(a,x) lower_bound(all(a),x)
-#define ub(a,x) upper_bound(all(a),x)
 #define test int __T__=1;if(testcases)cin>>__T__;while(__T__--)
 #define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
 #define make_unique(vec) sort(all(vec));vec.erase(unique(all(vec)),vec.end())
 #define sort_by(cont,expr) sort(all(cont),[&](const auto &lhs,const auto &rhs){return expr;})
 
-// copied macro - start
-template<typename T>struct number_iterator : iterator<random_access_iterator_tag,T>
-{T u;number_iterator(T v): u(v){}operator T&(){return u;}T operator *()const{return u;}};
-template<typename T>struct number_range
-{T l,r;number_range(T b,T e):l(b),r(e){}number_iterator<T> begin(){return l;}number_iterator<T> end(){return r;}};
-template<typename T>number_range<T> range(T e){return number_range<T>(0,e);}
-template<typename T>number_range<T> range(T b,T e){if(b>e)return number_range<T>(-b+1,-e+1);return number_range<T>(b,e);}
-// copied macro - end
-
-#define rep(i,n) for(int i=0;i<n;i++)
-#define loop(i,l,r) for(int i=l;i<r;i++)
-#define rrep(i,n) for(int i=n;~i;i--)
-#define rloop(i,r,l) for(int i=r;i>l;i--)
-
 ll seed;auto random_address=[]{char *p=new char;delete p;return (uint64_t)p;};
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count()*(random_address()|1));
 inline int rnd(int l=0,int r=INT_MAX){return uniform_int_distribution<int>(l,r)(rng);}
 
-template<typename T,typename U>inline bool exist(T cont,U val){return cont.find(val)!=cont.end();}
 template<typename T>bool isPrime(T n){for(T i=2;i*i<=n;i++)if(n%i==0)return 0;return 1;}
+template<typename T>inline bool in_range(T a,T l,T r){return (a>=l&&a<=r);}
+
+template<typename T,typename U>inline istream& operator >>(istream& in,pair<T,U> &a)
+{in>>a.ff>>a.ss;return in;}
+template<typename T>inline istream& operator >>(istream& in,vector<T> &a)
+{for(auto &x : a)in>>x;return in;}
 template<typename TAIL>inline void inp(TAIL& T){cin>>T;}
 template<typename HEAD,typename... TAIL>inline void inp(HEAD &H,TAIL&... T){cin>>H;inp(T...);}
-template<typename T>inline bool in_range(T a,T l,T r){return (a>=l&&a<=r);}
-template<typename T,typename U>inline istream& operator >>(istream& in,pair<T,U> &a){in>>a.ff>>a.ss;return in;}
-template<typename T>inline istream& operator >>(istream& in,vector<T> &a){for(auto &x : a)in>>x;return in;}
 
 ${2://include other}
 

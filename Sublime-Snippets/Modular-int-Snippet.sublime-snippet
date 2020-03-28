@@ -120,7 +120,7 @@ void build_factorial(int maximum=1e6)
     fact.resize(maximum+1);
     inv_fact.resize(maximum+1);
 
-    for(int i : range(2,maximum+1))
+    for(int i = 2; i <= maximum; i++)
     {
         inv[i]=inv[MOD%i]*(MOD-MOD/i);
         fact[i]=i*fact[i-1];

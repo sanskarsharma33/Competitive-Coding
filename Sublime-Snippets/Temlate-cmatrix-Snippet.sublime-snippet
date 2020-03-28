@@ -1,81 +1,92 @@
 <snippet>
     <content><![CDATA[
-${1://faster - only for 2 x 2 matrix
-struct matrix
+class matrix
 {
-    const int row=2,col=2;
-    ll a,b,c,d;
-    matrix(){a=d=1;b=c=0;\}
-    matrix(ll p,ll q,ll r,ll s){a=p;b=q;c=r;d=s;\}
-    
-    friend matrix operator *(const matrix &l,const matrix &r)
-    {
-        return matrix(sum(mul(l.a,r.a),mul(l.b,r.c)),
-                      sum(mul(l.a,r.b),mul(l.b,r.d)),
-                      sum(mul(l.c,r.a),mul(l.d,r.c)),
-                      sum(mul(l.c,r.b),mul(l.d,r.d)));
-    \}
 
-    friend matrix operator +(const matrix &l,const matrix &r)
-    {
-        return matrix(sum(l.a,l.a),
-                      sum(l.b,r.b),
-                      sum(l.c,r.c),
-                      sum(l.d,r.d));
-    \}
-    
-    friend matrix operator *=(matrix &l,const matrix &r){return l=l*r;\}
-    friend matrix operator +=(matrix &l,const matrix &r){return l=l+r;\}
-\};
-string to_string(const matrix &a)
-{
-    #ifdef DEBUG
-        return to_string({{a.a,a.b},{a.c,a.d}});
-    #endif
-        return "";
-\}}
-${2://slower but for all matrices
-struct matrix
-{
+public:
     vector<vector<ll>> mat;
-    int row,col;
-    matrix(int n,int m,ll val=1)
-    {
-        row=n;col=m;mat.resize(row);
-        rep(i,n){mat[i].resize(col);rep(j,m)mat[i][j]=((i==j)*val);\}
-    \}
-    matrix(const vector<vector<ll>> &a,ll except=0)
-    {
-        row=a.size();col=0;rep(i,row)MAX(col,(int)a[i].size());mat.resize(col);
-        rep(i,row){mat[i].resize(col);int j=0;for(ll x : a[i])mat[i][j++]=x;while(j<col)mat[i][j++]=except;\}
-    \}
+    int row, col;
 
-    friend matrix operator *(const matrix &l,const matrix &r)
+    matrix(int n, int m, ll val=1)
     {
-        assert(l.col==r.row);matrix ans(l.row,r.col);ll tot;
-        rep(i,l.row){rep(j,r.col){tot=0;rep(k,l.col)tot=sum(tot,mul(l.mat[i][k],r.mat[k][j]));ans.mat[i][j]=tot;\}\}
+        mat.assign(n, vector<ll>(m, 0));
+        
+        for(int i = 0; i < n; i++)
+            mat[i][i] = val;
+
+        row = n;
+        col = m;
+    }
+
+    matrix(const vector<vector<ll>> &a, ll except=0)
+    {
+        row = a.size();
+        size_t maxi = 0;
+        for(int i = 0; i < row; i++)
+            maxi=max(maxi,a[i].size());
+        col = maxi;
+
+        mat.assign(row, vector<ll>(col, except));
+
+        for(int i = 0; i < row; i++)
+        {
+            for(int j = 0; j < a[i].size(); j++)
+                mat[i][j]=a[i][j];
+        }
+    }
+
+    friend matrix operator *(const matrix &lhs, const matrix &rhs)
+    {
+        assert(lhs.col == rhs.row);
+        matrix ans(lhs.row, rhs.col);
+        Mint total, a, b;
+        
+        for(int i = 0; i < lhs.row; i++)
+        {
+            for(int j = 0; j < rhs.col; j++)
+            {
+                total = 0;
+                for(int k = 0; k < lhs.col; k++)
+                {
+                    a = lhs.mat[i][k];
+                    b = rhs.mat[k][j];
+                    total += a * b;
+                }
+                ans.mat[i][j] = total;
+            }
+        }
         return ans;
-    \}
+    }
 
-    friend matrix operator +(const matrix &l,const matrix &r)
+    friend matrix operator *=(matrix &lhs, const matrix &rhs)
     {
-        assert((l.row==r.row)&&(l.col==r.col));matrix ans(l.row,l.col,0);
-        rep(i,l.row){rep(j,l.col)ans.mat[i][j]=l[i][j]+r[i][j];\}
-        return ans;
-    \}
+        return lhs = lhs * rhs;
+    }
+}
 
-    friend matrix operator *=(matrix &l,const matrix &r){return l=l*r;\}
-    friend matrix operator +=(matrix &l,const matrix &r){return l=l+r;\}
-\};
 string to_string(const matrix &a)
 {
     #ifdef DEBUG
         return to_string(a.mat);
     #endif
-        return "";
-\}}
-void power(matrix &m,ll n){assert(m.row==m.col);matrix ans(m.row,m.col);while(n){if(n&1)ans*=m;m*=m;n>>=1;}m=ans;};
 
+    return "";
+}
+
+void power(matrix &m, ll n)
+{
+    assert(m.row == m.col);
+    matrix ans(m.row, m.col);
+
+    while(n > 0)
+    {
+        if(n&1)
+            ans *= m;
+        m *= m;
+        n>>=1;
+    }
+    m = ans;
+}
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
     <tabTrigger>cmatrix</tabTrigger>

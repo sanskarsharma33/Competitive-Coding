@@ -1,37 +1,56 @@
 <snippet>
     <content><![CDATA[
-struct dsu
+class dsu
 {
-    // when parent[x]<0 then x is root,
-    // and size of that set is -parent[x]
+
+public:
     vi parent;
-    int count=0;
+    int components,nodes;
 
-    dsu(int n=-1){if(~n)init(n);}
+    dsu():components(0),nodes(0){};
+    dsu(int size){init(max(1,size));}
 
-    void init(int n){parent.assign(n+1,-1);count=n;}
-    int find(int x){return parent[x]<0?x:parent[x]=find(parent[x]);}
-    int size(int x){return -parent[x];}
+    void init(int size)
+    {
+        parent.assign(size+1,-1);
+        nodes = components = size;
+    }
 
-    // if choice is true it means that y -> x (i.e. 'x' will be parent of both sets)
-    bool merge(int x,int y,bool choice=0)
+    int find(int x)
+    {
+        return parent[x]<0?x:parent[x]=find(parent[x]);
+    }
+
+    int size(int set)
+    {
+        return -parent[find(set)];
+    }
+
+    // if choice is true, then x will be 
+    // parent of y and it's child
+    bool merge(int x, int y, bool choice=0)
     {
         x=find(x);
         y=find(y);
+
         if(x==y)return 0;
         if(!choice && size(x)<size(y))swap(x,y);
-        parent[x]+=parent[y];
-        parent[y]=x;
-        count--;
+
+        parent[x] += parent[y];  // changing the size of x. (i.e. root node)
+        parent[y] = x;
+        components--;
         return 1;
     }
+
 };
+
 string to_string(const dsu &a)
 {
     #ifdef DEBUG
         return to_string(a.parent);
     #endif
-        return "";
+
+    return "";
 }
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

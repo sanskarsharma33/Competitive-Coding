@@ -1,15 +1,16 @@
 <snippet>
     <content><![CDATA[
+using MatrixType = ${1:Mint};
 class matrix
 {
 
 public:
-    vector<vector<ll>> mat;
+    vector<vector<Mint>> mat;
     int row, col;
 
-    matrix(int n, int m, ll val=1)
+    matrix(int n, int m, Mint val=1)
     {
-        mat.assign(n, vector<ll>(m, 0));
+        mat.assign(n, vector<Mint>(m, 0));
         
         for(int i = 0; i < n; i++)
             mat[i][i] = val;
@@ -18,7 +19,7 @@ public:
         col = m;
     }
 
-    matrix(const vector<vector<ll>> &a, ll except=0)
+    matrix(const vector<vector<Mint>> &a, Mint except=0)
     {
         row = a.size();
         size_t maxi = 0;
@@ -26,7 +27,7 @@ public:
             maxi=max(maxi,a[i].size());
         col = maxi;
 
-        mat.assign(row, vector<ll>(col, except));
+        mat.assign(row, vector<Mint>(col, except));
 
         for(int i = 0; i < row; i++)
         {
@@ -62,7 +63,7 @@ public:
     {
         return lhs = lhs * rhs;
     }
-}
+};
 
 string to_string(const matrix &a)
 {
@@ -73,7 +74,7 @@ string to_string(const matrix &a)
     return "";
 }
 
-void power(matrix &m, ll n)
+void power(matrix &m, Mint n)
 {
     assert(m.row == m.col);
     matrix ans(m.row, m.col);

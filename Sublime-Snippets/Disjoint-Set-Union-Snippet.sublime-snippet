@@ -5,6 +5,8 @@ class dsu
 
 public:
     vi parent;
+    multiset<int> sizes;
+    set<int> roots;
     int components,nodes;
 
     dsu():components(0),nodes(0){};
@@ -14,6 +16,11 @@ public:
     {
         parent.assign(size+1,-1);
         nodes = components = size;
+        for(int i = 1; i <= size ; i++)
+        {
+            sizes.insert(1);
+            roots.insert(i);
+        }
     }
 
     int find(int x)
@@ -36,8 +43,14 @@ public:
         if(x==y)return 0;
         if(!choice && size(x)<size(y))swap(x,y);
 
+        sizes.erase(sizes.find(size(x)));
+        sizes.erase(sizes.find(size(y)));
+        roots.erase(y);
+
         parent[x] += parent[y];  // changing the size of x. (i.e. root node)
         parent[y] = x;
+        sizes.insert(size(x));
+
         components--;
         return 1;
     }
@@ -47,10 +60,9 @@ public:
 string to_string(const dsu &a)
 {
     #ifdef DEBUG
-        return to_string(a.parent);
+        return "Parent --> " + to_string(a.parent) + '\n' + 
+        "       Roots --> " + to_string(a.roots);
     #endif
-
-    return "";
 }
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

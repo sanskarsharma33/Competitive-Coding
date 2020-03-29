@@ -42,6 +42,9 @@ ll kruskal_mst()
         if(edges == n - 1)
             break;
     }
+
+    if(edges < n-1)
+        return LLONG_MAX;
     return cost;
 }
 ]]></content>

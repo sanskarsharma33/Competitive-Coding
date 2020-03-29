@@ -63,6 +63,7 @@ string to_string(const dsu &a)
         return "Parent --> " + to_string(a.parent) + '\n' + 
         "       Roots --> " + to_string(a.roots);
     #endif
+    return "";
 }
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

@@ -3,6 +3,7 @@ struct edge
     int u, v;
     ll w;
 
+    // reverse bcoz of priority_queue
     friend bool operator <(const edge &lhs, const edge &rhs)
     {
         return lhs.w > rhs.w;

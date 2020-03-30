@@ -61,7 +61,8 @@ ll mst_prim(int root = 1)
             continue;
 
         vis[x.v] = 1;
-        mst[x.u].push_back(x.v);
+        add_edge(mst, x.u, x.v, x.w);
+        // mst[x.u].push_back(x.v);
         cost += x.w;
         edge++;
 

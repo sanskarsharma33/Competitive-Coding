@@ -39,7 +39,7 @@ void build_kruskal()
     sort(all(kruskal_util));
 }
 
-ll kruskal_mst()
+ll mst_kruskal()
 {
     int n = adj.size() - 1;
     dsu a(n);

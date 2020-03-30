@@ -21,6 +21,13 @@ vector<vector<pair<int, ll>>> adj, mst;
 priority_queue<edge> pq;
 vector<bool> vis;
 
+void add_edge(vector<vector<pair<int, ll>>> &a, int u, int v, ll w, bool dir = 0)
+{
+    a[u].push_back({v, w});
+    if(!dir)
+        a[v].push_back({u, w});
+}
+
 void fill_adj(int u)
 {
     for(const auto &v : adj[u])

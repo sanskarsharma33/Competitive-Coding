@@ -1,6 +1,6 @@
 <snippet>
     <content><![CDATA[
-cds${1:// type 'u' and press enter}
+cdsu${1:// press tab}
 
 struct edge
 {

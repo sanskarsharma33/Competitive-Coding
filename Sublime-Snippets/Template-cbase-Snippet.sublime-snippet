@@ -17,6 +17,7 @@ typedef unsigned int ui;
 typedef long long int ll;
 typedef pair<int,int> pii;
 typedef vector<int> vi;
+typedef vector<ll> vl;
 
 const bool testcases = $1;
 #define ff first

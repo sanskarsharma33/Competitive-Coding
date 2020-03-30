@@ -84,9 +84,15 @@ string to_string(const edge &x)
         return "";
 }
 
-vector<edge> adj;
-vector<vector<int>> mst;
+vector<vector<pair<int, ll>>> adj, mst;
 vector<edge> kruskal_util;
+
+void add_edge(vector<vector<pair<int, ll>>> &a, int u, int v, ll w, bool dir = 0)
+{
+    a[u].push_back([v, w]);
+    if(!dir)
+        a[v].push_back({u, w});
+}
 
 void build_kruskal()
 {
@@ -115,7 +121,8 @@ ll mst_kruskal()
 
         a.merge(e.u, e.v);
         cost += e.w;
-        mst[e.u].push_back(e.v);
+        add_edge(mst, e.u, e.v, e.w);
+        // mst[e.u].push_back(e.v);
         edges++;
 
         if(edges == n - 1)

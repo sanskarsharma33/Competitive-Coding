@@ -17,9 +17,8 @@ string to_string(const edge &x)
         return "";
 }
 
-vector<vector<pair<int, ll>>> adj;
+vector<vector<pair<int, ll>>> adj, mst;
 priority_queue<edge> pq;
-vector<vector<int>> mst;
 vector<bool> vis;
 
 void fill_adj(int u)

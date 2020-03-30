@@ -1,8 +1,7 @@
 bool atpos(int x,int pos){return ((x&(1LL<<pos))!=0);}
 int bit_count = 32;
-vector<vl> RangeAndUtil, RangeOrUtil;
-vl RangeXorUtil;
 
+vector<vl> RangeAndUtil;
 // will give a[l] & ... & a[r] in O(32), i.e. O(1)
 ll range_and(int l, int r)
 {
@@ -12,7 +11,7 @@ ll range_and(int l, int r)
     return res;
 }
 
-void build_range_and(const vi &a, bool is64bit = 0)
+void build_range_and(const vl &a, bool is64bit = 0)
 {
     bit_count = (1 + is64bit) * 32;
     int n = a.size();
@@ -25,6 +24,7 @@ void build_range_and(const vi &a, bool is64bit = 0)
     }
 }
 
+vector<vl> RangeOrUtil;
 // will give a[l] | ... | a[r] in O(32), i.e. O(1)
 ll range_or(int l, int r)
 {
@@ -34,7 +34,7 @@ ll range_or(int l, int r)
     return res;
 }
 
-void build_range_or(const vi &a, bool is64bit = 0)
+void build_range_or(const vl &a, bool is64bit = 0)
 {
     bit_count = (1 + is64bit) * 32;
     int n = a.size();
@@ -47,24 +47,25 @@ void build_range_or(const vi &a, bool is64bit = 0)
     }
 }
 
+vl RangeXorUtil;
 // will give a[l] ^ ... ^ a[r] in O(1)
 ll range_xor(int l, int r)
 {
-    return RangeXorUtil[r] ^ RangeXorUtil[l - 1];
+    return RangeXorUtil[r + 1] ^ RangeXorUtil[l];
 }
 
-void build_range_xor(const vi &a)
+void build_range_xor(const vl &a)
 {
     int n = a.size();
     RangeXorUtil.resize(n + 1);
     RangeXorUtil[0] = 1;
 
     for(int i = 1 ; i <= n ; i++)
-        RangeXorUtil[i] ^= a[i - 1];
+        RangeXorUtil[i] = a[i - 1] ^ RangeXorUtil[i - 1];
 }
 
 // will build all
-void build_range(const vi &a)
+void build_range(const vl &a)
 {
     build_range_and(a);
     build_range_xor(a);

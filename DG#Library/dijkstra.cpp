@@ -6,7 +6,7 @@ struct node
 string to_string(const node &a)
 {
     #ifdef DEBUG
-        return to_string({p, cost});
+        return to_string(make_pair(a.p, a.cost));
     #endif
         return "";
 }

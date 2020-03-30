@@ -2,41 +2,57 @@
     <content><![CDATA[
 cds${1:// type 'u' and press enter}
 
+struct edge
+{
+    int u, v;
+    ll w;
+
+    friend bool operator <(const edge &lhs, const edge &rhs)
+    {
+        return lhs.w < rhs.w;
+    }
+};
+
+string to_string(const edge &x)
+{
+    #ifdef DEBUG
+        return "{" + to_string(x.u) + ", " + to_string(x.v) + ", " + to_string(x.w) + "}";
+    #endif
+        return "";
+}
+
 vector<vector<pair<int, ll>>> adj;
 vector<vector<int>> mst;
-set<pair<ll, pii>> kruskal_util;
+vector<edge> kruskal_util;
 
 void build_kruskal()
 {
-    // kruskal_util[u] = {p, {q, r}} where,
+    // kruskal_util[u] = {p, q, r} where,
     // p is weight of the edge q --> r
-    int  n = adj.size() - 1;
+    int n = adj.size() - 1;
     mst.resize(n + 1);
     for(int u = 1; u <= n; u++)
     {
         for(const auto &v : adj[u])
-            kruskal_util.insert({v.ss, {u, v.ff}});
+            kruskal_util.push_back({u, v.ff, v.ss});
     }
+    sort(all(kruskal_util));
 }
 
 ll kruskal_mst()
 {
     int n = adj.size() - 1;
-    d(n);
     dsu a(n);
-    ll cost = 0, w;
+    ll cost = 0;
     int edges = 0;
-    int u, v;
-    for(const auto &x : kruskal_util)
-    {
-        u = x.ss.ff;
-        v = x.ss.ss;
-        w = x.ff;
-        if(a.find(u) == a.find(v))continue;
 
-        a.merge(u, v);
-        cost += w;
-        mst[u].push_back(v);
+    for(const auto &e : kruskal_util)
+    {
+        if(a.find(e.u) == a.find(e.v))continue;
+
+        a.merge(e.u, e.v);
+        cost += e.w;
+        mst[e.u].push_back(e.v);
         edges++;
 
         if(edges == n - 1)

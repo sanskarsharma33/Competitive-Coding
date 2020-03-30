@@ -7,6 +7,12 @@ from datetime import datetime
 
 quotes = [
 '''/***
+ ** "Program testing can be used to show the presence of bugs, but never to show their absence!"
+ **     -- Edsgar W. Dijkstra
+***/
+''',
+
+'''/***
  ** "Never Forget What you are,the rest of the world will not.Wear it like armour and it can never be used to hurt you"
  **     -- Tyrion Lannister
 ***/

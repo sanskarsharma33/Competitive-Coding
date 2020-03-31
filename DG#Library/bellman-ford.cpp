@@ -49,7 +49,7 @@ int fill_bf()
     return size;
 }
 
-void sssp_bf(int root = 1)
+bool sssp_bf(int root = 1)
 {
     int n = adj.size() - 1, cur;
     int m = fill_bf();
@@ -58,8 +58,6 @@ void sssp_bf(int root = 1)
     sssp[root].cost = 0;
 
     bool changed;
-
-    // if we want to find negative cycle then we need to iterate till n
     for(int i = 1 ; i < n ; i++)
     {
         // cur = -1;
@@ -67,7 +65,7 @@ void sssp_bf(int root = 1)
         for(int j = 0 ; j < m ; j++)
         {
             ll dis = sssp[edges[j].u].cost;
-            if(dis < INT_MAX)
+            if(dis < INF)
             {
                 dis += edges[j].cost;
                 if(dis < sssp[edges[j].v].cost)
@@ -84,12 +82,17 @@ void sssp_bf(int root = 1)
     }
 
     /*
-    // to find a negative cycle, is still remaining...
-
-    // will retrun true if graph contains negative cycle
-    if(~cur)
-        return true;
-    return false;
-
+    // to check wethear their is an negative cycle or not
+    for(int j = 0 ; j < m ; j++)
+    {
+        ll dis = sssp[edges[j].u].cost;
+        if(dis < INF)
+        {
+            dis += edges[j].cost;
+            if(dis < sssp[edges[j].v].cost)
+                return false;
+        }
+    }
     */
+    return true;
 }

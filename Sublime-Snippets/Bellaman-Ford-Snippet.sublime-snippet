@@ -1,25 +1,9 @@
 <snippet>
 	<content><![CDATA[
 const ll INF = INT_MAX;
-struct edge
-{
-    int u, v;
-    ll cost;
-};
-string to_string(const edge &a)
-{
-    #ifdef DEBUG
-        vl res = {a.u, a.v, a.cost};
-        return to_string(res);
-    #endif
-        return "";
-}
+cedge${1:// press tab}
 
-struct node
-{
-    int p;
-    ll cost = INF;
-};
+cnode${1:// press tab}
 
 vector<vector<pair<int, ll>>> adj;
 vector<edge> edges;
@@ -53,7 +37,7 @@ int fill_bf()
 
 bool sssp_bf(int root = 1)
 {
-    int n = adj.size() - 1, cur;
+    int n = adj.size() - 1;
     int m = fill_bf();
 
     sssp.resize(n + 1);
@@ -62,7 +46,6 @@ bool sssp_bf(int root = 1)
     bool changed;
     for(int i = 1 ; i < n ; i++)
     {
-        // cur = -1;
         changed = false;
         for(int j = 0 ; j < m ; j++)
         {
@@ -73,7 +56,6 @@ bool sssp_bf(int root = 1)
                 if(dis < sssp[edges[j].v].cost)
                 {
                     sssp[edges[j].v] = {edges[j].u, max(-INF, dis)};
-                    // cur = edges[j].v;
                     changed = true;
                 }
             }

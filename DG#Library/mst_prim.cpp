@@ -1,22 +1,26 @@
 struct edge
 {
     int u, v;
-    ll w;
+    ll cost;
+    string to_string()
+    {
+        #ifdef DEBUG
+            vl res = {u, v, w};
+            return to_string(res);
+        #endif
+            return "";
+    }
 
-    // reverse bcoz of priority_queue
     friend bool operator <(const edge &lhs, const edge &rhs)
     {
-        return lhs.w > rhs.w;
+        ll w1 = lhs.cost;
+        ll w2 = rhs.cost;
+
+        if(w1 == w2)
+            return lhs.u < rhs.u;
+        return w1 > w2;
     }
 };
-
-string to_string(const edge &x)
-{
-    #ifdef DEBUG
-        return "{" + to_string(x.u) + ", " + to_string(x.v) + ", " + to_string(x.w) + "}";
-    #endif
-        return "";
-}
 
 vector<vector<pair<int, ll>>> adj, mst;
 priority_queue<edge> pq;
@@ -73,4 +77,11 @@ ll mst_prim(int root = 1)
     if(edge < n - 1)
         return LLONG_MAX;
     return cost;
+}
+
+void clearAll(int n)
+{
+    adj.clear();
+    adj.resize(n + 1);
+    mst.clear();
 }

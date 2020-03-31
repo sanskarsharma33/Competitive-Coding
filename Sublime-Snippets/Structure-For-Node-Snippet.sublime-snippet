@@ -1,31 +1,29 @@
 <snippet>
 	<content><![CDATA[
-struct edge
+struct node
 {
-    int u, v;
-    ll cost;
+    int p;
+    ll cost = INF;
     string to_string()
     {
         #ifdef DEBUG
-            vl res = {u, v, w};
-            return to_string(res);
+            return to_string(make_pair(p, cost));
         #endif
             return "";
     }
 
-    friend bool operator <(const edge &lhs, const edge &rhs)
+    friend bool operator <(const node &lhs, const node &rhs)
     {
         ll w1 = lhs.cost;
         ll w2 = rhs.cost;
-
         if(w1 == w2)
-            return lhs.u < rhs.u;
+            return 1;
         return w1 < w2;
     }
 };
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>cedge</tabTrigger>
+	<tabTrigger>cnode</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.c++</scope>
 </snippet>

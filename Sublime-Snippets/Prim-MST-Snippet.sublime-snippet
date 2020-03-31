@@ -1,24 +1,7 @@
 <snippet>
 	<content><![CDATA[
-struct edge
-{
-    int u, v;
-    ll w;
-
-    // reverse bcoz of priority_queue
-    friend bool operator <(const edge &lhs, const edge &rhs)
-    {
-        return lhs.w > rhs.w;
-    }
-};
-
-string to_string(const edge &x)
-{
-    #ifdef DEBUG
-        return "{" + to_string(x.u) + ", " + to_string(x.v) + ", " + to_string(x.w) + "}";
-    #endif
-        return "";
-}
+// reverse the operator overloading due to priority_queue
+cedge${1:// press tab}
 
 vector<vector<pair<int, ll>>> adj, mst;
 priority_queue<edge> pq;

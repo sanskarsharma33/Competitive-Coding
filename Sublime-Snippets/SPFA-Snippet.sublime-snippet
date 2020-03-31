@@ -1,19 +1,7 @@
 <snippet>
 	<content><![CDATA[
 const ll INF = INT_MAX;
-struct node
-{
-    int p;
-    ll cost = INF;
-};
-
-string to_string(const node &a)
-{
-    #ifdef DEBUG
-        return to_string(make_pair(a.p, a.cost));
-    #endif
-        return "";
-}
+cnode${1:// press tab}
 
 vector<vector<pair<int, ll>>> adj;
 vector<node> sssp;

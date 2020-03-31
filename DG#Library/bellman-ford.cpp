@@ -11,12 +11,38 @@ struct edge
         #endif
             return "";
     }
+
+    friend bool operator <(const edge &lhs, const edge &rhs)
+    {
+        ll w1 = lhs.cost;
+        ll w2 = rhs.cost;
+
+        if(w1 == w2)
+            return lhs.u < rhs.u;
+        return w1 < w2;
+    }
 };
 
 struct node
 {
     int p;
     ll cost = INF;
+    string to_string()
+    {
+        #ifdef DEBUG
+            return to_string(make_pair(p, cost));
+        #endif
+            return "";
+    }
+
+    friend bool operator <(const node &lhs, const node &rhs)
+    {
+        ll w1 = lhs.cost;
+        ll w2 = rhs.cost;
+        if(w1 == w2)
+            return 1;
+        return w1 < w2;
+    }
 };
 
 vector<vector<pair<int, ll>>> adj;
@@ -51,7 +77,7 @@ int fill_bf()
 
 bool sssp_bf(int root = 1)
 {
-    int n = adj.size() - 1, cur;
+    int n = adj.size() - 1;
     int m = fill_bf();
 
     sssp.resize(n + 1);
@@ -60,7 +86,6 @@ bool sssp_bf(int root = 1)
     bool changed;
     for(int i = 1 ; i < n ; i++)
     {
-        // cur = -1;
         changed = false;
         for(int j = 0 ; j < m ; j++)
         {
@@ -71,7 +96,6 @@ bool sssp_bf(int root = 1)
                 if(dis < sssp[edges[j].v].cost)
                 {
                     sssp[edges[j].v] = {edges[j].u, max(-INF, dis)};
-                    // cur = edges[j].v;
                     changed = true;
                 }
             }

@@ -53,17 +53,16 @@ public:
         return 1;
     }
 
+    string to_string()
+    {
+        #ifdef DEBUG
+            return "Parent --> " + to_string(parent) + '\n' + 
+            "       Roots --> " + to_string(roots);
+        #endif
+
+        return "";
+    }
 };
-
-string to_string(const dsu &a)
-{
-    #ifdef DEBUG
-        return "Parent --> " + to_string(a.parent) + '\n' + 
-        "       Roots --> " + to_string(a.roots);
-    #endif
-
-    return "";
-}
 
 struct edge
 {
@@ -74,15 +73,15 @@ struct edge
     {
         return lhs.w < rhs.w;
     }
-};
 
-string to_string(const edge &x)
-{
-    #ifdef DEBUG
-        return "{" + to_string(x.u) + ", " + to_string(x.v) + ", " + to_string(x.w) + "}";
-    #endif
-        return "";
-}
+    string to_string()
+    {
+        #ifdef DEBUG
+            return "{" + to_string(u) + ", " + to_string(v) + ", " + to_string(w) + "}";
+        #endif
+            return "";
+    }
+};
 
 vector<vector<pair<int, ll>>> adj, mst;
 vector<edge> kruskal_util;
@@ -100,11 +99,16 @@ void build_kruskal()
     // p is weight of the edge q --> r
     int n = adj.size() - 1;
     mst.resize(n + 1);
+    int i = -1;
     for(int u = 1; u <= n; u++)
     {
         for(const auto &v : adj[u])
-            kruskal_util.push_back({u, v.ff, v.ss});
+            i++;
     }
+
+    kruskal_util.resize(i + 1);
+    while(~i)
+        kruskal_util[i--] = {u, v.ff, v.ss};
     sort(all(kruskal_util));
 }
 
@@ -132,4 +136,12 @@ ll mst_kruskal()
     if(edges < n-1)
         return LLONG_MAX;
     return cost;
+}
+
+void clearAll(int n)
+{
+    adj.clear();
+    adj.resize(n + 1);
+    mst.clear();
+    kruskal_util.clear();
 }

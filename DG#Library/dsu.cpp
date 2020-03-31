@@ -53,14 +53,13 @@ public:
         return 1;
     }
 
+    string to_string()
+    {
+        #ifdef DEBUG
+            return "Parent --> " + to_string(parent) + '\n' + 
+            "       Roots --> " + to_string(roots);
+        #endif
+
+        return "";
+    }
 };
-
-string to_string(const dsu &a)
-{
-    #ifdef DEBUG
-        return "Parent --> " + to_string(a.parent) + '\n' + 
-        "       Roots --> " + to_string(a.roots);
-    #endif
-
-    return "";
-}

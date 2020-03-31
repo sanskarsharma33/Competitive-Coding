@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+struct edge
+{
+    int u, v;
+    ll cost;
+    string to_string()
+    {
+        #ifdef DEBUG
+            vl res = {u, v, w};
+            return to_string(res);
+        #endif
+            return "";
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cedge</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

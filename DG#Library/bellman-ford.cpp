@@ -3,15 +3,15 @@ struct edge
 {
     int u, v;
     ll cost;
+    string to_string()
+    {
+        #ifdef DEBUG
+            vl res = {u, v, w};
+            return to_string(res);
+        #endif
+            return "";
+    }
 };
-string to_string(const edge &a)
-{
-    #ifdef DEBUG
-        vl res = {a.u, a.v, a.cost};
-        return to_string(res);
-    #endif
-        return "";
-}
 
 struct node
 {

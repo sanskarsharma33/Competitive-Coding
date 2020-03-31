@@ -58,9 +58,11 @@ void sssp_bf(int root = 1)
     sssp[root].cost = 0;
 
     bool changed;
-    for(int i = 0 ; i < n ; i++)
+
+    // if we want to find negative cycle then we need to iterate till n
+    for(int i = 1 ; i < n ; i++)
     {
-        cur = -1;
+        // cur = -1;
         changed = false;
         for(int j = 0 ; j < m ; j++)
         {
@@ -71,7 +73,7 @@ void sssp_bf(int root = 1)
                 if(dis < sssp[edges[j].v].cost)
                 {
                     sssp[edges[j].v] = {edges[j].u, max(-INF, dis)};
-                    cur = edges[j].v;
+                    // cur = edges[j].v;
                     changed = true;
                 }
             }

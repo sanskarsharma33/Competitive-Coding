@@ -1,7 +1,8 @@
+const ll INF = INT_MAX;
 struct node
 {
     int p;
-    ll cost;
+    ll cost = INF;
 };
 string to_string(const node &a)
 {
@@ -25,7 +26,7 @@ vector<node> sssp;
 void sssp_dijkstra(int root = 1)
 {
     int n = adj.size() - 1;
-    sssp.assign(n + 1, {-1, INT_MAX});
+    sssp.resize(n + 1);
 
     sssp[root] = {root, 0};
     s.insert({0, root});

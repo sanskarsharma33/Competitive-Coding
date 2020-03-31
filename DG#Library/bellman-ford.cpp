@@ -96,3 +96,11 @@ bool sssp_bf(int root = 1)
     */
     return true;
 }
+
+void clearAll(int n)
+{
+    adj.clear();
+    adj.resize(n + 1);
+    edges.clear();
+    sssp.clear();
+}

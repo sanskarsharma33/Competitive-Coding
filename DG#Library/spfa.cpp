@@ -15,6 +15,7 @@ string to_string(const node &a)
 
 vector<vector<pair<int, ll>>> adj;
 vector<node> sssp;
+vi relax_util;
 
 void add_edge(vector<vector<pair<int, ll>>> &a, int u, int v, ll w, bool dir = 0)
 {
@@ -29,6 +30,7 @@ bool spfa(int root = 1)
     
     vector<bool> relaxed(n + 1, false);
     deque<int> q;
+    relax_util.assign(n + 1, 0);
     sssp.resize(n + 1);
 
     relaxed[root] = true;
@@ -40,7 +42,6 @@ bool spfa(int root = 1)
         q.pop_front();
         relaxed[u] = false;
 
-        d(u, adj[u]);
         for(const auto &v : adj[u])
         {
             ll dist = sssp[u].cost;
@@ -49,6 +50,10 @@ bool spfa(int root = 1)
                 dist += v.ss;
                 if(dist < sssp[v.ff].cost)
                 {
+                    // checking for negative weight cycle existence
+                    relax_util[v.ff]++;
+                    if(relax_util[v.ff] >= n)
+                        return false;
                     sssp[v.ff] = {u, dist};
                     if(!relaxed[v.ff])
                     {
@@ -62,7 +67,6 @@ bool spfa(int root = 1)
             }
         }
     }
-
     return true;
 }
 

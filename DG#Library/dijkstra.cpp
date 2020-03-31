@@ -48,3 +48,10 @@ void sssp_dijkstra(int root = 1)
         }
     }
 }
+
+void clearAll(int n)
+{
+    adj.clear();
+    adj.resize(n + 1);
+    sssp.clear();
+}

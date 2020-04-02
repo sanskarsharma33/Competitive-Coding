@@ -11,15 +11,18 @@ else:
     string = f.readline()
     string = string[3:]
     contest_id, prob_no = string.split('@')
+    prob_no = prob_no.upper()
+
     print('Contest Id : ' + contest_id)
-    print('Problem No : ' + prob_no)
+    print('Problem No : ' + prob_no[0])
+    f.close()
 
 import os
 import sys
 import requests
 import time
 from bs4 import BeautifulSoup
-  
+
 # Extract i/o statements for the problem 
 def get_contest_io(contest_problem_url,contest_id,prob_no):
 
@@ -77,10 +80,41 @@ if(page.status_code != 200):
 soup = BeautifulSoup(page.text, 'html.parser') #page.text contains the html or the page source
 contest_problem_url = 'https://codeforces.com/contest/{}/problem/'.format(contest_id)
 
+problems = soup.find('div', attrs={"class":"datatable"}).find('table').findAll('a')
+
+char = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77]
+j = 0
+
+problem_name = ''
+for i in range(len(problems)):
+    if i%4 != 0:
+        continue
+    problems[i].text.strip()
+    problem_no = problems[i].text.strip()
+    problem_name = problems[i+1].text.strip()
+
+    if char[j] == ord(prob_no[0]):
+        break
+    j += 1
+
+prob_str = '// Problem: ' + problem_name
+f1 = open(dg.path + '1.cpp', 'r')
+mycode = f1.readlines()
+f1.close()
+
+f1 = open(dg.path + '1.cpp', 'w')
+fir = True
+for line in mycode:
+    if fir:
+        f1.write(prob_str + '\n')
+        fir = False
+        continue
+    f1.write(line)
+f.close()
+
 get_contest_io(contest_problem_url,contest_id,prob_no)
 print('Data Parsed !!')
 
-cmd = ['python', 'DGCompiler.py']
 
 # holding screen
 dg.holdScreen()

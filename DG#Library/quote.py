@@ -159,9 +159,17 @@ class QuoteCommand(sublime_plugin.TextCommand):
         path = self.view.file_name()
 
         now = datetime.now()
-        # "  *Date:     %d.%m.%Y\n  *  Time:     %H:%M:%S"
+
+        f = open('1.cpp', 'r')
+        fir = f.readline()
+        if fir[1] == '/':
+            problem_name = fir[3:]
+        else:
+            problem_name = 'Problem: ' + '__________\n'
+        f.close()
+
         cur_time = "  *  Date:   " + now.strftime("%d.%m.%Y") + "\n  *  Time:   " + now.strftime("%H:%M:%S")
-        description = "/**\n  *  Author: dhruv_gheewala\n" + cur_time + "\n**/\n\n"
+        description = "/**\n  *  Author: dhruv_gheewala\n  *  " + problem_name + cur_time + "\n**/\n\n"
 
         with open(path,"r") as file:
             mycode = file.read()

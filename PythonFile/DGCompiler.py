@@ -150,4 +150,5 @@ pofile.close()
 dfile.close()
 
 # to hold the screen
+print('Press Enter To Continue !!  ', end = '')
 dg.holdScreen()

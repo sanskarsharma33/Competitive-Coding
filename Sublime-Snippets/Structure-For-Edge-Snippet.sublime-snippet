@@ -4,14 +4,6 @@ struct edge
 {
     int u, v;
     ll cost;
-    string to_string()
-    {
-        #ifdef DEBUG
-            vl res = {u, v, w};
-            return to_string(res);
-        #endif
-            return "";
-    }
 
     friend bool operator <(const edge &lhs, const edge &rhs)
     {
@@ -23,6 +15,15 @@ struct edge
         return w1 < w2;
     }
 };
+
+string to_string(const edge &a)
+{
+    #ifdef DEBUG
+        vl res = {a.u, a.v, a.w};
+        return to_string(res);
+    #endif
+        return "";
+}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>cedge</tabTrigger>

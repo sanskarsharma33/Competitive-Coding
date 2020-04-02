@@ -3,13 +3,6 @@ struct node
 {
     int p;
     ll cost = INF;
-    string to_string()
-    {
-        #ifdef DEBUG
-            return to_string(make_pair(p, cost));
-        #endif
-            return "";
-    }
 
     friend bool operator <(const node &lhs, const node &rhs)
     {
@@ -20,6 +13,14 @@ struct node
         return w1 < w2;
     }
 };
+
+string to_string(const node &a)
+{
+    #ifdef DEBUG
+        return to_string(make_pair(a.p, a.cost));
+    #endif
+        return "";
+}
 
 vector<vector<pair<int, ll>>> adj;
 vector<node> sssp;

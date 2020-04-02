@@ -2,15 +2,7 @@ struct edge
 {
     int u, v;
     ll cost;
-    string to_string()
-    {
-        #ifdef DEBUG
-            vl res = {u, v, w};
-            return to_string(res);
-        #endif
-            return "";
-    }
-
+    
     friend bool operator <(const edge &lhs, const edge &rhs)
     {
         ll w1 = lhs.cost;
@@ -21,6 +13,15 @@ struct edge
         return w1 > w2;
     }
 };
+
+string to_string(const edge &a)
+{
+    #ifdef DEBUG
+        vl res = {a.u, a.v, a.w};
+        return to_string(res);
+    #endif
+        return "";
+}
 
 vector<vector<pair<int, ll>>> adj, mst;
 priority_queue<edge> pq;

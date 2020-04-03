@@ -5,6 +5,85 @@ import sublime_plugin, os
 import random
 from datetime import datetime
 
+class QuoteCommand(sublime_plugin.TextCommand):
+
+    now = datetime.now()
+
+    def giveDate(self):
+        return self.now.strftime("%d.%m.%Y") + '\n'
+
+    def giveTime(self):
+        return self.now.strftime("%H:%M:%S") + '\n'
+
+    def problemNameExist(self, path):
+        f = open(path, 'r')
+        fir = f.readline()
+        f.close()
+        print(fir)
+        return len(fir) >= 3 and fir[:3] == '// '
+
+    def problemName(self, path):
+        if self.problemNameExist(path):
+            f = open(path, 'r')
+            pname = f.readline()
+            f.close()
+            return pname[3:]
+        return '__________\n'
+
+    def alreadyCreated(self, path):
+        f = open(path, 'r')
+        fir = f.readline()
+        f.close()
+        return len(fir) >= 2 and fir[1] == '*'
+
+    def run(self, edit):
+        now = datetime.now()
+        path = self.view.file_name()
+
+        if self.alreadyCreated(path):
+            f = open(path, 'r')
+            lines = ''
+            for i in range(12):
+                line = f.readline()
+                if i == 8:
+                    lines += '  *  Date:   ' + self.giveDate()
+                    continue
+                
+                if i == 9:
+                    lines += '  *  Time:   ' + self.giveTime()
+                    continue
+
+                lines += line
+
+            mycode = ''
+            for line in f.readlines():
+                mycode += line
+            f.close()
+        else:
+            ind = random.randrange(len(quotes))
+            today_quote = quotes[ind] + '\n'
+            desc = '/**\n  *  Author: dhruv_gheewala\n'
+            pname = '  *  Problem: ' + self.problemName(path)
+            time = '  *  Date:   ' + self.giveDate() + '  *  Time:   ' + self.giveTime()
+            ending = '**/\n\n'
+
+            lines = today_quote + desc + pname + time + ending
+
+            f = open(path, 'r')
+            mycode = ''
+            f.readline()
+            for line in f.readlines():
+                mycode += line
+            f.close()
+
+        f = open(path, 'w')
+        f.write(lines + mycode)
+        f.close()
+
+
+
+
+# Quotes
 quotes = [
 '''/***
  ** "Program testing can be used to show the presence of bugs, but never to show their absence!"
@@ -151,35 +230,3 @@ quotes = [
 ''',
 
 ]
-
-class QuoteCommand(sublime_plugin.TextCommand):
-    def run(self, edit):
-        ind = random.randrange(len(quotes))
-        today_quote = quotes[ind] + "\n"
-        path = self.view.file_name()
-
-        now = datetime.now()
-
-        f = open('1.cpp', 'r')
-        fir = f.readline()
-        if fir[1] == '/':
-            problem_name = fir[3:]
-        else:
-            problem_name = 'Problem: ' + '__________\n'
-        f.close()
-
-        cur_time = "  *  Date:   " + now.strftime("%d.%m.%Y") + "\n  *  Time:   " + now.strftime("%H:%M:%S")
-        description = "/**\n  *  Author: dhruv_gheewala\n  *  " + problem_name + cur_time + "\n**/\n\n"
-
-        f = open('1.cpp', 'r')
-        fir = True
-        mycode = ''
-        for line in f.readlines():
-            if fir:
-                fir = False
-                continue
-            mycode += line
-        f.close()
-
-        with open(path,"w") as file:
-            file.write(today_quote + description + mycode)

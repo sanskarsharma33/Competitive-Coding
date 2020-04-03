@@ -11,6 +11,7 @@
     #define o(str) 42
     #define fundri 108
     #define d(...) 1729
+    #define begginingOfCode(tc) nothing
 #endif
 
 
@@ -59,16 +60,15 @@ int main()
     
     fast;
     ${5://variables}
-    test{
-
-    $6
-
-    fundri;
+    test
+    {
+        begginingOfCode(tc);
+        $6
     }
 
     end_time = std::chrono::high_resolution_clock::now();
     ll elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time-start_time).count();
-    o("\n\n======\n");
+    o("\n\n");
     if(elapsed_time<10000)
         o("Elapsed Time: "<<elapsed_time<<" ms\n");
     else

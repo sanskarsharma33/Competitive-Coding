@@ -46,6 +46,11 @@ def checkIfProcessRunning(processName):
     return False;
 
 
+# clearing debug file
+dfile = open(dg.path + 'DEBUG.txt', 'w')
+dfile.write(styleWrite() + 'Your Debugs: \n')
+dfile.close()
+
 TestCase = 1
 
 print('Compiling File 1.cpp...')
@@ -56,7 +61,7 @@ print('Compiled SuccedFully...')
 pifile = open(dg.path + 'ParsedInput.txt', 'r')
 pofile = open(dg.path + 'ParsedOutput.txt', 'r')
 dfile = open(dg.path + 'DEBUG.txt', 'a')
-
+dfile.write('\n\n\n' + styleWrite() + 'TestData Information: ')
 inputs = ''
 wholeSummary = ''
 
@@ -86,7 +91,7 @@ for line in pifile.readlines():
 		
 
 		print('Running File...')
-		cmd = [dg.path + '1.exe']
+		cmd = [dg.path + '1.exe', str(TestCase)]
 		subprocess.call(cmd)
 		while checkIfProcessRunning('1.exe'):
 			timepass = True

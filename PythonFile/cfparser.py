@@ -1,4 +1,5 @@
 # path : C:\Users\ViralChoksi\AppData\Roaming\Sublime Text 3\Packages\CFParser\cfparser
+# {"keys": ["ctrl+alt+t"],"command": "cfparser"},
 
 import sublime, os, sublime_plugin
 

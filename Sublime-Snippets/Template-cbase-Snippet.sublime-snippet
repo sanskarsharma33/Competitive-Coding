@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     #ifdef DHRUV_GHEEWALA
         freopen("INPUT.txt","r",stdin);
         freopen("OUTPUT.txt","w",stdout);
-        freopen("DEBUG.txt","w",stderr);
+        freopen("DEBUG.txt","a",stderr);
     #endif
     
     fast;

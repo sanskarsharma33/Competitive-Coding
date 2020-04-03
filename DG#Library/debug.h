@@ -17,7 +17,7 @@ using namespace std;
     sim(pair<T,U> p);
     sor(const string &s){return '"'+s+'"';}
     sor(const char *s){return to_string((string)s);}
-    sor(const bool b){return b?"true":"false";}
+    sor(const bool b){return b?"1":"0";}
     sor(char c){string res(3,'\'');res[1]=c;return res;}
     
     // vector<bool>
@@ -51,7 +51,7 @@ using namespace std;
             res += to_string(pq.top());
             pq.pop();
         }
-        return res + "}";
+        return res += "}";
     }
 
 
@@ -62,18 +62,6 @@ using namespace std;
     template<typename Head,typename... Tail>
     void debug(Head H,Tail... T){cerr<<" "<<to_string(H);debug(T...);}
     #define d(...) cerr<<"["<<#__VA_ARGS__<<"] :",debug(__VA_ARGS__)
-
-    void begginingOfCode(int tc)
-    {
-        cerr << "====================================================================================\n";
-        cerr << "Test #" << tc << " : \n";
-    }
-
-    void begginingOfCode(char tc)
-    {
-        cerr << "====================================================================================\n";
-        cerr << "Test #" << tc << " : \n";
-    }
 
 #else
 

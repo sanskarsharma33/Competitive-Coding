@@ -11,7 +11,6 @@
     #define o(str) 42
     #define fundri 108
     #define d(...) 1729
-    #define begginingOfCode(tc) nothing
 #endif
 
 
@@ -47,7 +46,7 @@ template<typename HEAD,typename... TAIL>inline void inp(HEAD &H,TAIL&... T){cin>
 
 ${4://include other}
 
-int main()
+int main(int argc, char **argv)
 {
     std::chrono::time_point<std::chrono::high_resolution_clock> start_time, end_time;
     start_time = std::chrono::high_resolution_clock::now();
@@ -61,9 +60,11 @@ int main()
     fast;
     ${5://variables}
     test
-    {
-        begginingOfCode(tc);
+    {   
         $6
+
+
+        fundri;
     }
 
     end_time = std::chrono::high_resolution_clock::now();

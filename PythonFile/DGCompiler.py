@@ -58,6 +58,7 @@ pofile = open(dg.path + 'ParsedOutput.txt', 'r')
 dfile = open(dg.path + 'DEBUG.txt', 'a')
 
 inputs = ''
+wholeSummary = ''
 
 for line in pifile.readlines():
 
@@ -81,6 +82,7 @@ for line in pifile.readlines():
 
 		print('input : ')
 		print(writeIndent(inputs, giveTestWrite(TestCase) + ' input :   '), end = '')
+		dfile.write('\nTestCase :\n' + writeIndent(inputs, 'TestCase :   ') + '\n')
 		
 
 		print('Running File...')
@@ -116,6 +118,7 @@ for line in pifile.readlines():
 		if isPassed:
 			dfile.write('Passed' + '\n')
 			print(' Passed', end = ' ')
+			wholeSummary += str(TestCase) + '. Passed\n'
 		else:
 			dfile.write('Failed\n')
 			dfile.write('Expected : \n')
@@ -129,6 +132,8 @@ for line in pifile.readlines():
 			print('Obtained : \n')
 			print(writeIndent(obtained, 'Obtained :   '))
 
+			wholeSummary += str(TestCase) + '. Failed\n'
+
 		
 		inputs = ''
 		TestCase += 1
@@ -141,8 +146,8 @@ for line in pifile.readlines():
 		
 		inputs += line
 
-dfile.write(styleWrite())
-print(styleWrite(), end = ' ')
+dfile.write(styleWrite() + wholeSummary + styleWrite())
+print(styleWrite() + wholeSummary + styleWrite(), end = ' ')
 
 
 pifile.close()
@@ -150,5 +155,5 @@ pofile.close()
 dfile.close()
 
 # to hold the screen
-print('Press Enter To Continue !!  ', end = '')
-dg.holdScreen()
+# print('Press Enter To Continue !!  ', end = '')
+# dg.holdScreen()

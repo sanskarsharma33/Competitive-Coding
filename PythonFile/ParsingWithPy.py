@@ -117,4 +117,4 @@ print('Data Parsed !!')
 
 
 # holding screen
-dg.holdScreen()
+# dg.holdScreen()

@@ -1,6 +1,6 @@
 <snippet>
     <content><![CDATA[
-// ${1:contest_id}@${2:problem_num}
+// ${1:Problem: }@${2:problem_num}
 #if __has_include("debug.h")
     #include "debug.h"
 #else

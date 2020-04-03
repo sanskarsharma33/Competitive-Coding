@@ -24,30 +24,41 @@ vector<vector<pair<int, ll>>> adj;
 set<pii> s;
 vector<node> sssp;
 
-void sssp_dijkstra(int root = 1)
+int sssp_dijkstra(int root = 1, int dest = -1)
 {
     int n = adj.size() - 1;
-    sssp.resize(n + 1);
-
+ 
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    vector<node> sssp(n + 1);
+    vector<bool> vis(n + 1, false);
+ 
     sssp[root] = {root, 0};
-    s.insert({0, root});
-    while(!s.empty())
+    pq.push({0, root});
+    
+    while(!pq.empty())
     {
-        auto p = s.begin();
-        int u = p->ss;
-        s.erase(s.begin());
+        auto p = pq.top();
+        int u = p.ss;
+        pq.pop();
+        if(u == dest && vis[u])
+            return sssp[u].cost;
 
-        for(auto v : adj[u])
+        if(!vis[u])
         {
-            int dist = sssp[u].cost + v.ss;
-            if(dist < sssp[v.ff].cost)
+            vis[u] = 1;
+            for(auto v : adj[u])
             {
-                s.erase({sssp[v.ff].cost, v.ff});
-                sssp[v.ff] = {u, dist};
-                s.insert({dist, v.ff});
+                int dist = sssp[u].cost + v.ss;
+                if(dist < sssp[v.ff].cost && !vis[v.ff])
+                {
+                    sssp[v.ff] = {u, dist};
+                    pq.push({dist, v.ff});
+                }
             }
         }
     }
+    if(~dest) return sssp[dest].cost;
+    return INF;
 }
 
 void clearAll(int n)

@@ -30,8 +30,7 @@ const bool testcases = $2;
 #define make_unique(vec) sort(all(vec));vec.erase(unique(all(vec)),vec.end())
 #define sort_by(cont,expr) sort(all(cont),[&](const auto &lhs,const auto &rhs){return expr;})
 
-ll seed;auto random_address=[]{char *p=new char;delete p;return (uint64_t)p;};
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count()*(random_address()|1));
+ll seed;mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 inline int rnd(int l=0,int r=INT_MAX){return uniform_int_distribution<int>(l,r)(rng);}
 
 template<typename T>bool isPrime(T n){for(T i=2;i*i<=n;i++)if(n%i==0)return 0;return 1;}
@@ -60,7 +59,7 @@ int main(int argc, char **argv)
     fast;
     ${4://variables}
     test
-    {   
+    {
         $5
 
 

@@ -1,16 +1,13 @@
 <snippet>
-	<content><![CDATA[
+    <content><![CDATA[
 struct node
 {
-    int p;
-    ll cost = INF;
+    int ${1:a},${2:b};
 
     friend bool operator <(const node &lhs, const node &rhs)
     {
-        ll w1 = lhs.cost;
-        ll w2 = rhs.cost;
-        if(w1 == w2)
-            return 1;
+        if(lhs.${1:a} == rhs.${1:a})
+            return lhs.${2:b} < rhs.${2:b};
         return w1 < w2;
     }
 };
@@ -18,13 +15,13 @@ struct node
 string to_string(const node &a)
 {
     #ifdef DEBUG
-        return to_string(make_pair(a.p, a.cost));
+        return to_string(make_pair(a.${1:a}, a.${2:b}));
     #endif
         return "";
 }
 ]]></content>
-	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>cnode</tabTrigger>
-	<!-- Optional: Set a scope to limit where the snippet will trigger -->
-	<scope>source.c++</scope>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>cnode</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++</scope>
 </snippet>

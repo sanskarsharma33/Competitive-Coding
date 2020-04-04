@@ -24,12 +24,16 @@ inline int rnd(int l=0,int r=INT_MAX){return uniform_int_distribution<int>(l,r)(
 int rand(int l, int r){int tot = r - l + 1;return rand()%tot + l;}
 
 vector<char> vowels[2] = {{'a', 'e', 'i', 'o', 'u'}, {'A', 'E', 'I', 'O', 'U'}};
+string ende = "$###%###%#############%###%###$\n";
 
 int main()
 {
-	// freopen("INPUT.txt", "r+");
+	// freopen("INPUT.txt", "w", stdout);
+	// freopen("ParsedInput.txt", "w", stdout);
+	// freopen("ParsedOutput.txt", "w", stderr);
     fast;
-    int t = rand(1, 10);
+    int t = rnd(1, 10);
+    cout << t << endl;
     
     return 0;
 }

@@ -1,6 +1,6 @@
 <snippet>
     <content><![CDATA[
-// ${1:Problem: }@${2:problem_num}
+// ${1:Problem: }
 #if __has_include("debug.h")
     #include "debug.h"
 #else
@@ -20,7 +20,7 @@ typedef pair<int,int> pii;
 typedef vector<int> vi;
 typedef vector<ll> vl;
 
-const bool testcases = $3;
+const bool testcases = $2;
 #define ff first
 #define ss second
 #define endl '\n'
@@ -44,7 +44,7 @@ template<typename T>inline istream& operator >>(istream& in,vector<T> &a)
 template<typename TAIL>inline void inp(TAIL& T){cin>>T;}
 template<typename HEAD,typename... TAIL>inline void inp(HEAD &H,TAIL&... T){cin>>H;inp(T...);}
 
-${4://include other}
+${3://include other}
 
 int main(int argc, char **argv)
 {
@@ -58,10 +58,10 @@ int main(int argc, char **argv)
     #endif
     
     fast;
-    ${5://variables}
+    ${4://variables}
     test
     {   
-        $6
+        $5
 
 
         fundri;

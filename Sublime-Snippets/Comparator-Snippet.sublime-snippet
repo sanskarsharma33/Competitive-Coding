@@ -2,7 +2,7 @@
 	<content><![CDATA[
 bool cmp$1(const ${2:node} &lhs, const ${2:node} &rhs)
 {
-    return $3;
+    return lhs.$3 < rhs.$3;
 }
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

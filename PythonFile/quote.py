@@ -7,11 +7,6 @@ from datetime import datetime
 
 class QuoteCommand(sublime_plugin.TextCommand):
 
-    now = datetime.now()
-
-    def init(self):
-        now = datetime.now()
-
     def giveDate(self):
         return self.now.strftime("%d.%m.%Y") + '\n'
 
@@ -40,7 +35,7 @@ class QuoteCommand(sublime_plugin.TextCommand):
         return len(fir) >= 2 and fir[1] == '*'
 
     def run(self, edit):
-        self.init()
+        self.now = datetime.now()
         path = self.view.file_name()
 
         if self.alreadyCreated(path):

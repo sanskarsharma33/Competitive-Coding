@@ -1,6 +1,6 @@
 <snippet>
     <content><![CDATA[
-// ${1:Problem: }
+// ${1:Problem Name}
 #if __has_include("debug.h")
     #include "debug.h"
 #else
@@ -13,12 +13,10 @@
     #define d(...) 1729
 #endif
 
-
-typedef unsigned int ui;
-typedef long long int ll;
+#define int long long
+typedef long long ll;
 typedef pair<int,int> pii;
 typedef vector<int> vi;
-typedef vector<ll> vl;
 
 const bool testcases = $2;
 #define ff first
@@ -43,9 +41,7 @@ template<typename T>inline istream& operator >>(istream& in,vector<T> &a)
 template<typename TAIL>inline void inp(TAIL& T){cin>>T;}
 template<typename HEAD,typename... TAIL>inline void inp(HEAD &H,TAIL&... T){cin>>H;inp(T...);}
 
-${3://include other}
-
-int main(int argc, char **argv)
+int32_t main(int32_t argc, char **argv)
 {
     std::chrono::time_point<std::chrono::high_resolution_clock> start_time, end_time;
     start_time = std::chrono::high_resolution_clock::now();
@@ -57,11 +53,10 @@ int main(int argc, char **argv)
     #endif
     
     fast;
-    ${4://variables}
+    ${3://variables}
     test
     {
-        $5
-
+        $4
 
         fundri;
     }

@@ -17,7 +17,6 @@ class QuoteCommand(sublime_plugin.TextCommand):
         f = open(path, 'r')
         fir = f.readline()
         f.close()
-        print(fir)
         return len(fir) >= 3 and fir[:3] == '// '
 
     def problemName(self, path):
@@ -69,7 +68,8 @@ class QuoteCommand(sublime_plugin.TextCommand):
 
             f = open(path, 'r')
             mycode = ''
-            f.readline()
+            if self.problemNameExist(path):
+                f.readline()
             for line in f.readlines():
                 mycode += line
             f.close()

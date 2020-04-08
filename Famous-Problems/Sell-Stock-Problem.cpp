@@ -1,22 +1,29 @@
-// we can take atmost k stocks at a time
+// we can have atmost k(<= n) stock at a time
 int sell_stock_problem(vi &profits, int k)
 {
-    vi dp(k + 1, -INF);
-    dp[0] = 0;
+    int n = profits.size();
+    k = min(n, k);
 
-    for(auto profit : profits)
+    vector<vi> dp(2, vi(k + 1, INT_MIN));
+    dp[0][0] = dp[1][0] = 0;
+
+    for(int i = 1 ; i < n ; i++)
     {
-        dp[0] = max(dp[0], dp[1] + profit);
-        for(int i = k ; ~i ; i--)
-            dp[i] = max(dp[i], dp[i - 1] - profit);
+        dp[1][0] = max(dp[0][0], dp[0][1] + profits[i]);
+        dp[1][k] = max(dp[0][k], dp[0][k - 1] - profits[i]);
+        
+        for(int j = k - 1 ; j >= 1 ; j--)
+            dp[1][j] = max({dp[0][j], dp[0][j - 1] - profits[i], dp[0][j + 1] + profits[i]});
+
+        for(int j = 0 ; j <= k ; j++)
+            dp[0][j] = dp[1][j];
     }
 
-    return dp[0];
-    // bcoz, we don't need to have share at the end of all days
+    // or return *max_element(all(dp[1]));
+    return dp[1][0];
+    // but this is good, bcoz atlast, it is better to have no stocks
 }
-/***
- *** we can create 2-d dp array,
- *** where, dp[i][j] is value of
- *** best profit after buying j stock
- *** after i-th day
-***/
+
+// dp[0][] is best values for prev days
+// dp[1][] is best values for current days
+// dp[][i] is best values with i stocks

@@ -5,22 +5,25 @@ class dsu
 
 public:
     vi parent;
-    multiset<int> sizes;
-    set<int> roots;
+    // multiset<int> sizes;
+    // set<int> roots;
     int components,nodes;
 
     dsu():components(0),nodes(0){};
-    dsu(int size){init(max(1,size));}
+    dsu(int size)
+    {
+        init(max(1LL, size));
+    }
 
     void init(int size)
     {
         parent.assign(size+1,-1);
         nodes = components = size;
-        for(int i = 1; i <= size ; i++)
-        {
-            sizes.insert(1);
-            roots.insert(i);
-        }
+        // for(int i = 1; i <= size ; i++)
+        // {
+            // sizes.insert(1);
+            // roots.insert(i);
+        // }
     }
 
     int find(int x)
@@ -43,13 +46,13 @@ public:
         if(x==y)return 0;
         if(!choice && size(x)<size(y))swap(x,y);
 
-        sizes.erase(sizes.find(size(x)));
-        sizes.erase(sizes.find(size(y)));
-        roots.erase(y);
+        // sizes.erase(sizes.find(size(x)));
+        // sizes.erase(sizes.find(size(y)));
+        // roots.erase(y);
 
         parent[x] += parent[y];  // changing the size of x. (i.e. root node)
         parent[y] = x;
-        sizes.insert(size(x));
+        // sizes.insert(size(x));
 
         components--;
         return 1;
@@ -59,8 +62,9 @@ public:
 string to_string(const dsu &a)
 {
     #ifdef DEBUG
-        return "Parent --> " + to_string(a.parent) + '\n' + 
-        "       Roots --> " + to_string(a.roots);
+        string res = "Parent --> " + to_string(a.parent) + '\n';
+        // res += "       Roots --> " + to_string(a.roots);
+        return res;
     #endif
 
     return "";

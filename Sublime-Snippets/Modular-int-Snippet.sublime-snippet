@@ -34,14 +34,10 @@ class Modular
 
     sim=T>typename enable_if<is_same<typename Modular<U>::Type, int>::value, Modular>::type& operator*=(const Modular &rhs)
     {
-        #ifdef _WIN32
-            uint64_t x=static_cast<int64_t>(value)*static_cast<int64_t>(rhs.value);
-            uint32_t xh=static_cast<uint32_t>(x>>32),x1=static_cast<uint32_t>(x),d,m;
-            asm("divl %4; \n\t":"=a"(d),"=d"(m):"d"(xh),"a"(x1),"r"(__mod()));
-            value=m;
-        #else
-            value=normalize(value*rhs.value-q*__mod());
-        #endif 
+        uint64_t x=static_cast<int64_t>(value)*static_cast<int64_t>(rhs.value);
+        uint32_t xh=static_cast<uint32_t>(x>>32),x1=static_cast<uint32_t>(x),d,m;
+        asm("divl %4; \n\t":"=a"(d),"=d"(m):"d"(xh),"a"(x1),"r"(__mod()));
+        value=m;
         ris;
     }
 
@@ -104,27 +100,28 @@ typename common_type<typename Modular<U>::Type,int64_t>::type x;in>>x;n.value=Mo
 // ModType& MOD=VarMod::value;
 // using Mint=Modular<VarMod>;
 
-constexpr int MOD = 998244353;
+constexpr int32_t MOD = 998244353;
 using Mint = Modular<integral_constant<decay<decltype(MOD)>::type, MOD>>;
 
 vector<Mint> inv,inv_fact,fact;
-void build_factorial(int maximum=1e6)
+void build_factorial(int maximum = 1e6)
 {
-    for(int i=2;i*i<=MOD;i++)
-        assert(MOD%i);
-    inv={0,1};
-    fact=inv_fact={1,1};
+    for(int i = 2 ; i * i <= MOD ; i++)
+        assert(MOD % i);
 
-    maximum=max(maximum,1);
-    inv.resize(maximum+1);
-    fact.resize(maximum+1);
-    inv_fact.resize(maximum+1);
+    inv = {0, 1};
+    fact=inv_fact = {1, 1};
+
+    maximum = max(maximum, 1LL);
+    inv.resize(maximum + 1);
+    fact.resize(maximum + 1);
+    inv_fact.resize(maximum + 1);
 
     for(int i = 2; i <= maximum; i++)
     {
-        inv[i]=inv[MOD%i]*(MOD-MOD/i);
-        fact[i]=i*fact[i-1];
-        inv_fact[i]=inv[i]*inv_fact[i-1];
+        inv[i] = inv[MOD % i] * (MOD - MOD / i);
+        fact[i] = i * fact[i - 1];
+        inv_fact[i] = inv[i] * inv_fact[i - 1];
     }
 }
 

@@ -1,9 +1,7 @@
 <snippet>
     <content><![CDATA[
-class dsu
+struct dsu
 {
-
-public:
     vi parent;
     // multiset<int> sizes;
     // set<int> roots;
@@ -56,6 +54,13 @@ public:
 
         components--;
         return 1;
+    }
+
+    void clear()
+    {
+        parent.clear();
+        // sizes.clear();
+        // roots.clear();
     }
 };
 

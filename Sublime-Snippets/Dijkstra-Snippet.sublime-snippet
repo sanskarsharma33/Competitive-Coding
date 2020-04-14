@@ -1,7 +1,25 @@
 <snippet>
     <content><![CDATA[
 const ll INF = INT_MAX;
-cnod${1:// press tab}
+struct node
+{
+    int u,cost;
+
+    friend bool operator <(const node &lhs, const node &rhs)
+    {
+        if(lhs.u == rhs.u)
+            return lhs.cost < rhs.cost;
+        return lhs.u < rhs.u;
+    }
+};
+
+string to_string(const node &a)
+{
+    #ifdef DEBUG
+        return to_string(make_pair(a.u, a.cost));
+    #endif
+        return "";
+}
 
 void add_edge(vector<vector<pair<int, ll>>> &a, int u, int v, ll w, bool dir = 0)
 {

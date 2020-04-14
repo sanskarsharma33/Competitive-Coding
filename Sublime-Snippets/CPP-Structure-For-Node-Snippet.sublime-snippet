@@ -8,7 +8,7 @@ struct node
     {
         if(lhs.${1:a} == rhs.${1:a})
             return lhs.${2:b} < rhs.${2:b};
-        return w1 < w2;
+        return lhs.${1:a} < rhs.${1:a};
     }
 };
 

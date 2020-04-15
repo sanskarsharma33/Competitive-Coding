@@ -45,6 +45,35 @@ def checkIfProcessRunning(processName):
             pass
     return False;
 
+def changeLine():
+
+	str1 = "        freopen(\"DEBUG.txt\",\"w\",stderr);\n"
+	str2 = "        freopen(\"DEBUG.txt\",\"a\",stderr);\n"
+
+	f = open(dg.path + '1.cpp', 'r')
+
+	mycode = ''
+	for line in f.readlines():
+		if line == str1:
+			print('fir : ' + line)
+			line = str2
+			print('fir : ' + line)
+		elif line == str2:
+			print('sec : ' + line)
+			line = str1
+			print('sec : ' + line)
+
+		mycode += line
+
+	f.close()
+
+	f = open(dg.path + '1.cpp', 'w')
+	f.write(mycode)
+	f.close()
+
+
+# changing cpp file to append mode(prefered for o/p)
+changeLine()
 
 # clearing debug file
 dfile = open(dg.path + 'DEBUG.txt', 'w')
@@ -167,6 +196,5 @@ pifile.close()
 pofile.close()
 dfile.close()
 
-# to hold the screen
-# print('Press Enter To Continue !!  ', end = '')
-# dg.holdScreen()
+# changing back cpp file to write mode
+changeLine()

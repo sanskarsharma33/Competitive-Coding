@@ -1,44 +1,48 @@
 <snippet>
     <content><![CDATA[
-const ll INF = INT_MAX;
+/****
+  ** Time Complexity : O(V + E * LogV)
+  ** Space Complexity : O(V + E)
+****/
+
+typedef vector<vector<pii>> graph;
+const int INF = LLONG_MAX - 2 * INT_MAX;
+
 struct node
 {
-    int u,cost;
+    int par;
+    int cost = INF;
 
     friend bool operator <(const node &lhs, const node &rhs)
     {
-        if(lhs.u == rhs.u)
-            return lhs.cost < rhs.cost;
-        return lhs.u < rhs.u;
+        if(lhs.cost == rhs.cost)
+            return lhs.par < rhs.par;
+        return lhs.cost < rhs.cost;
     }
 };
 
 string to_string(const node &a)
 {
     #ifdef DEBUG
-        return to_string(make_pair(a.u, a.cost));
+        return to_string(make_pair(a.par, a.cost));
     #endif
         return "";
 }
 
-void add_edge(vector<vector<pair<int, ll>>> &a, int u, int v, ll w, bool dir = 0)
+void add_edge(graph &a, int u, int v, int w, bool dir = false)
 {
     a[u].push_back({v, w});
     if(!dir)
         a[v].push_back({u, w});
 }
 
-vector<vector<pair<int, ll>>> adj;
-set<pii> s;
+graph adj;
+priority_queue<pii, vector<pii>, greater<pii>> pq;
 vector<node> sssp;
 
 int sssp_dijkstra(int root = 1, int dest = -1)
 {
     int n = adj.size() - 1;
- 
-    priority_queue<pii, vector<pii>, greater<pii>> pq;
-    vector<node> sssp(n + 1);
-    vector<bool> vis(n + 1, false);
  
     sssp[root] = {root, 0};
     pq.push({0, root});
@@ -48,25 +52,25 @@ int sssp_dijkstra(int root = 1, int dest = -1)
         auto p = pq.top();
         int u = p.ss;
         pq.pop();
-        if(u == dest && vis[u])
+
+        if(u == dest)
             return sssp[u].cost;
 
-        if(!vis[u])
+        if(p.ff != sssp[u].cost)
+            continue;
+
+        for(auto v : adj[u])
         {
-            vis[u] = 1;
-            for(auto v : adj[u])
+            int dist = sssp[u].cost + v.ss;
+            if(dist < sssp[v.ff].cost)
             {
-                int dist = sssp[u].cost + v.ss;
-                if(dist < sssp[v.ff].cost && !vis[v.ff])
-                {
-                    sssp[v.ff] = {u, dist};
-                    pq.push({dist, v.ff});
-                }
+                sssp[v.ff] = {u, dist};
+                pq.push({dist, v.ff});
             }
         }
     }
-    if(~dest) return sssp[dest].cost;
-    return INF;
+    
+    return ~dest ? return sssp[dest].cost : return INF;
 }
 
 void clearAll(int n)
@@ -74,6 +78,8 @@ void clearAll(int n)
     adj.clear();
     adj.resize(n + 1);
     sssp.clear();
+    sssp.resize(n + 1);
+    pq = priority_queue<pii, vector<pii>, greater<pii>>();
 }
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

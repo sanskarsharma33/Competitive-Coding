@@ -2,24 +2,24 @@
 	<content><![CDATA[
 struct edge
 {
-    int u, v;
-    ll cost;
+    int ${1:a}, ${2:b}, ${3:c};
 
     friend bool operator <(const edge &lhs, const edge &rhs)
     {
-        ll w1 = lhs.cost;
-        ll w2 = rhs.cost;
-
-        if(w1 == w2)
-            return lhs.u < rhs.u;
-        return w1 < w2;
+        if(lhs.${1:a} == rhs.${1:a})
+        {
+            if(lhs.${2:b} == rhs.${2:b})
+                return lhs.${3:c} < rhs.${3:c};
+            return lhs.${2:b} < rhs.${2:b};
+        }
+        return lhs.${1:a} < rhs.${1:a};
     }
 };
 
 string to_string(const edge &a)
 {
     #ifdef DEBUG
-        vl res = {a.u, a.v, a.w};
+        vl res = {a.${1:a}, a.${2:b}, a.${3:c}};
         return to_string(res);
     #endif
         return "";

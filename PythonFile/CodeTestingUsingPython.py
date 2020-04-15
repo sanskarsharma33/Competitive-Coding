@@ -3,6 +3,29 @@ import os
 from subprocess import Popen, PIPE
 import psutil
 
+def isCorrect():
+	ans1 = ''
+	ans2 = ''
+
+	# in1 = ''
+	# in2 = ''
+
+	with open('D:\\Dhruv\\Codes\\C++\\OUTPUT.txt','r') as opfile:
+		ans1 = opfile.readline()
+		ans2 = opfile.readline()
+	
+	# with open('D:\\Dhruv\\Codes\\C++\\INPUT.txt','r') as ipfile:
+	# 	ipfile.readline()
+	# 	in1 = ipfile.readline()
+	# 	in2 = ipfile.readline()
+
+	# n, a, b = int(in1.split(' '))
+	# for i in range(n):
+
+	# print(ans1 + ans2)
+	return ans1 == '1\n' and ans2 == '1\n'
+
+
 def checkIfProcessRunning(processName):
     for proc in psutil.process_iter():
         try:
@@ -39,13 +62,7 @@ while True:
 
 	print('Execution Completed !!', end='\n')
 
-	with open('D:\\Dhruv\\Codes\\C++\\DEBUG.txt','a+') as debugfile:
-		debugfile.seek(0, os.SEEK_END)
-
-		if debugfile.tell():
-			end_of_program = True
-		else:
-			end_of_program = False
+	end_of_program = not isCorrect()
 
 	j += 1
 

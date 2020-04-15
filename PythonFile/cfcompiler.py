@@ -1,5 +1,4 @@
 # path : C:\Users\ViralChoksi\AppData\Roaming\Sublime Text 3\Packages\CFCompiler\cfcompiler
-# {"keys": ["ctrl+alt+b"],"command": "cfcompiler"},
 
 import sublime, os, sublime_plugin
 

@@ -5,7 +5,7 @@ using namespace std;
 #define DEBUG
 #ifdef DEBUG
 
-    #define wspc "\n\t "
+    #define endl '\n'
     #define cline cerr<<"Line : "<<__LINE__<<", "
     #define p(str) cerr<<str
     #define o(str) cerr<<str
@@ -15,10 +15,28 @@ using namespace std;
     #define sor string to_string
 
     sim(pair<T,U> p);
-    sor(const string &s){return '"'+s+'"';}
-    sor(const char *s){return to_string((string)s);}
-    sor(const bool b){return b?"1":"0";}
-    sor(char c){string res(3,'\'');res[1]=c;return res;}
+    
+    sor(const string &s)
+    {
+        return '"'+s+'"';
+    }
+    
+    sor(const char *s)
+    {
+        return to_string((string)s);
+    }
+    
+    sor(const bool b)
+    {
+        return b?"1":"0";
+    }
+
+    sor(char c)
+    {
+        string res(3, '\'');
+        res[1] = c;
+        return res;
+    }
     
     // vector<bool>
     sor(vector<bool> v)
@@ -36,32 +54,84 @@ using namespace std;
         return res;
     }
     
-    template<size_t N>sor(bitset<N> v){string res="";for(int i=0;i<N;i++)res+=static_cast<char>(v[i]+'0');return res;}
+    template<size_t N>sor(bitset<N> v)
+    {
+        string res = "";
+        for(int i = 0 ; i < N ; i++)
+            res += static_cast<char>(v[i] + '0');
+        return res;
+    }
 
     // priority_queue
-    dor(priority_queue<T> pq)
+    // dor(priority_queue<T, vector<T>, greater<T>> pq)
+    // dor(priority_queue<T> pq)
+    // {
+    //     string res = "{";
+    //     bool fir = true;
+    //     while(!pq.empty())
+    //     {
+    //         if(!fir)
+    //             res += ", ";
+    //         fir = false;
+    //         res += to_string(pq.top());
+    //         pq.pop();
+    //     }
+    //     return res += "}";
+    // }
+
+    dor(stack<T> s)
     {
         string res = "{";
-        bool fir = 1;
-        while(!pq.empty())
+        bool fir = true;
+        while(!s.empty())
         {
             if(!fir)
                 res += ", ";
-            fir = 0;
-            res += to_string(pq.top());
-            pq.pop();
+            fir = false;
+            res += to_string(s.top());
+            s.pop();
         }
-        return res += "}";
+        return res + "}";
     }
 
+    dor(T v)
+    {
+        bool fir = true;
+        string res = "{";
+        for(const auto &x : v)
+        {
+            if(!fir)
+                res += ", ";
+            fir = false;
+            res += to_string(x);
+        }
+        res += "}";
+        return res;
+    }
+    
+    sim(pair<T,U> p)
+    {
+        string res = "{";
+        res += to_string(p.first);
+        res += ", ";
+        res += to_string(p.second);
+        res += "}";
+        return res;
+    }
 
-    dor(T v){bool fir=1;string res="{";for(const auto &x : v){if(!fir)res+=", ";fir=0;res+=to_string(x);}res+="}";return res;}
-    sim(pair<T,U> p){return "{"+to_string(p.first)+", "+to_string(p.second)+"}";}
-
-    void debug(){cerr<<wspc[0];}
+    void debug()
+    {
+        cerr << endl;
+    }
+    
     template<typename Head,typename... Tail>
-    void debug(Head H,Tail... T){cerr<<" "<<to_string(H);debug(T...);}
-    #define d(...) cerr<<"["<<#__VA_ARGS__<<"] :",debug(__VA_ARGS__)
+    void debug(Head H,Tail... T)
+    {
+        cerr << " " << to_string(H);
+        debug(T...);
+    }
+    
+    #define d(...) cerr << "[" << #__VA_ARGS__ << "] :", debug(__VA_ARGS__)
 
 #else
 

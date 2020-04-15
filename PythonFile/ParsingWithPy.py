@@ -97,7 +97,9 @@ for i in range(len(problems)):
         break
     j += 1
 
-prob_str = '// Problem: ' + problem_name
+print('Done !!')
+# prob_str = '// Problem: ' + problem_name
+prob_str = '// ' + problem_name
 f1 = open(dg.path + '1.cpp', 'r')
 mycode = f1.readlines()
 f1.close()

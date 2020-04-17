@@ -12,7 +12,7 @@ const int MAXM = 100;
 const int MAXW = 100;
 
 // testcases
-int t = rnd(1, 100)
+int t = rnd(1, 100);
 // t = 1;
 cout << t << endl;
 

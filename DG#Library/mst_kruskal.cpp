@@ -1,24 +1,17 @@
-class dsu
+/****
+  ** Time Complexity(building) : O(E * LogE)
+  ** Time Complexity : O(E * LogV)
+  ** Space Complexity : O(V + E)
+****/
+
+const int INF = LLONG_MAX - 2LL * INT_MAX;
+struct dsu
 {
-
-public:
     vi parent;
-    multiset<int> sizes;
-    set<int> roots;
-    int components,nodes;
 
-    dsu():components(0),nodes(0){};
-    dsu(int size){init(max(1,size));}
-
-    void init(int size)
+    dsu(int size)
     {
-        parent.assign(size+1,-1);
-        nodes = components = size;
-        for(int i = 1; i <= size ; i++)
-        {
-            sizes.insert(1);
-            roots.insert(i);
-        }
+        parent.assign(size + 1, -1);
     }
 
     int find(int x)
@@ -31,8 +24,6 @@ public:
         return -parent[find(set)];
     }
 
-    // if choice is true, then x will be 
-    // parent of y and it's child
     bool merge(int x, int y, bool choice=0)
     {
         x=find(x);
@@ -41,24 +32,23 @@ public:
         if(x==y)return 0;
         if(!choice && size(x)<size(y))swap(x,y);
 
-        sizes.erase(sizes.find(size(x)));
-        sizes.erase(sizes.find(size(y)));
-        roots.erase(y);
-
-        parent[x] += parent[y];  // changing the size of x. (i.e. root node)
+        parent[x] += parent[y];
         parent[y] = x;
-        sizes.insert(size(x));
 
-        components--;
         return 1;
+    }
+
+    void clear()
+    {
+        parent.clear();
     }
 };
 
 string to_string(const dsu &a)
 {
     #ifdef DEBUG
-        return "Parent --> " + to_string(a.parent) + '\n' + 
-        "       Roots --> " + to_string(a.roots);
+        string res = "Parent --> " + to_string(a.parent) + '\n';
+        return res;
     #endif
 
     return "";
@@ -66,11 +56,16 @@ string to_string(const dsu &a)
 
 struct edge
 {
-    int u, v;
-    ll w;
+    int u, v, w;
 
     friend bool operator <(const edge &lhs, const edge &rhs)
     {
+        if(lhs.w == rhs.w)
+        {
+            if(lhs.u == rhs.u)
+                return lhs.v < rhs.v;
+            return lhs.u < rhs.u;
+        }
         return lhs.w < rhs.w;
     }
 };
@@ -78,63 +73,64 @@ struct edge
 string to_string(const edge &a)
 {
     #ifdef DEBUG
-        return "{" + to_string(a.u) + ", " + to_string(a.v) + ", " + to_string(a.w) + "}";
+        vi res = {a.w, a.u, a.v};
+        return to_string(res);
     #endif
         return "";
 }
 
-vector<vector<pair<int, ll>>> adj, mst;
-vector<edge> kruskal_util;
+typedef vector<vector<pii>> graph;
+graph adj;
+vector<edge> krushkal_util, mst;
 
-void add_edge(vector<vector<pair<int, ll>>> &a, int u, int v, ll w, bool dir = 0)
+void add_edge(graph &a, int u, int v, int w)
 {
-    a[u].push_back([v, w]);
-    if(!dir)
-        a[v].push_back({u, w});
+    adj[u].push_back({v, w});
 }
 
-void build_kruskal()
+void build_krushkal()
 {
-    // kruskal_util[u] = {p, {q, r}} where,
-    // p is weight of the edge q --> r
+    int size, cur;
     int n = adj.size() - 1;
-    mst.resize(n + 1);
-    int i = -1;
-    for(int u = 1; u <= n; u++)
-    {
-        for(const auto &v : adj[u])
-            i++;
-    }
 
-    kruskal_util.resize(i + 1);
-    while(~i)
-        kruskal_util[i--] = {u, v.ff, v.ss};
-    sort(all(kruskal_util));
+    size = cur = 0;
+    for(int i = 1 ; i < n + 1 ; i++)
+        size += adj[i].size();
+
+    krushkal_util.resize(size);
+    for(int i = 1 ; i < n + 1 ; i++)
+        for(auto &p : adj[i])
+            krushkal_util[cur++] = {i, p.ff, p.ss};
+
+    sort(all(krushkal_util));
 }
 
-ll mst_kruskal()
+int krushkal(bool isBuildRequired = true)
 {
+    if(isBuildRequired)
+        build_krushkal();
+
+    int cost, edges;
     int n = adj.size() - 1;
-    dsu a(n);
-    ll cost = 0;
-    int edges = 0;
+    dsu disj(n);
+    mst.resize(n - 1);
 
-    for(const auto &e : kruskal_util)
+    cost = edges = 0;
+    for(edge &e : krushkal_util)
     {
-        if(a.find(e.u) == a.find(e.v))continue;
+        if(disj.merge(e.u, e.v))
+        {
+            mst[edges] = e;
+            cost += e.w;
+            edges++;
 
-        a.merge(e.u, e.v);
-        cost += e.w;
-        add_edge(mst, e.u, e.v, e.w);
-        // mst[e.u].push_back(e.v);
-        edges++;
-
-        if(edges == n - 1)
-            break;
+            if(edges == n - 1)
+                break;
+        }
     }
 
-    if(edges < n-1)
-        return LLONG_MAX;
+    if(edges != n - 1)
+        return INF;
     return cost;
 }
 
@@ -142,6 +138,7 @@ void clearAll(int n)
 {
     adj.clear();
     adj.resize(n + 1);
+
+    krushkal_util.clear();
     mst.clear();
-    kruskal_util.clear();
 }

@@ -6,10 +6,10 @@ using namespace std;
 #ifdef DEBUG
 
     #define endl '\n'
-    #define cline cerr<<"Line : "<<__LINE__<<", "
-    #define p(str) cerr<<str
-    #define o(str) cerr<<str
-    #define fundri cerr<<"----------\n"
+    #define cline cerr << "(Line-" << __LINE__ << ") "
+    #define p(str) cerr << str
+    #define o(str) cerr << str
+    #define fundri cerr << "----------\n"
     #define sim template<typename T,typename U>string to_string
     #define dor template<typename T>string to_string
     #define sor string to_string
@@ -64,20 +64,20 @@ using namespace std;
 
     // priority_queue
     // dor(priority_queue<T, vector<T>, greater<T>> pq)
-    // dor(priority_queue<T> pq)
-    // {
-    //     string res = "{";
-    //     bool fir = true;
-    //     while(!pq.empty())
-    //     {
-    //         if(!fir)
-    //             res += ", ";
-    //         fir = false;
-    //         res += to_string(pq.top());
-    //         pq.pop();
-    //     }
-    //     return res += "}";
-    // }
+    dor(priority_queue<T> pq)
+    {
+        string res = "{";
+        bool fir = true;
+        while(!pq.empty())
+        {
+            if(!fir)
+                res += ", ";
+            fir = false;
+            res += to_string(pq.top());
+            pq.pop();
+        }
+        return res += "}";
+    }
 
     dor(stack<T> s)
     {
@@ -119,26 +119,27 @@ using namespace std;
         return res;
     }
 
-    void debug()
+    template<typename T>
+    void debug_out(string name, T arg)
     {
-        cerr << endl;
+        cerr << name << " = " << to_string(arg) << endl;
     }
     
     template<typename Head,typename... Tail>
-    void debug(Head H,Tail... T)
+    void debug_out(string names, Head arg,Tail... args)
     {
-        cerr << " " << to_string(H);
-        debug(T...);
+        cerr << names.substr(0, names.find(',')) << " = " << to_string(arg) << ", ";
+        debug_out(names.substr(names.find(',') + 2), args...);
     }
     
-    #define d(...) cerr << "[" << #__VA_ARGS__ << "] :", debug(__VA_ARGS__)
+    #define debug(...) cline, debug_out(#__VA_ARGS__, __VA_ARGS__)
 
 #else
 
     #define p(str) 42
     #define o(str) 108
     #define fundri 137
-    #define d(...) 1729
+    #define debug(...) 1729
 
 #endif
 

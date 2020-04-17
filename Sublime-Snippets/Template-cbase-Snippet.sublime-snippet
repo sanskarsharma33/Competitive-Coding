@@ -10,7 +10,7 @@
     #define p(str) 7
     #define o(str) 42
     #define fundri 108
-    #define d(...) 1729
+    #define debug(...) 1729
 #endif
 
 #define int long long

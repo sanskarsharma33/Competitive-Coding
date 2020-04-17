@@ -1,7 +1,8 @@
 <snippet>
 	<content><![CDATA[
-vector<vector<pair<int, ll>>> adj;
-void add_edge(vector<vector<pair<int, ll>>> &a, int u, int v, ll w, bool dir = 0)
+typedef vector<vector<pii>> graph;
+graph adj;
+void add_edge(graph &a, int u, int v, ll w, bool dir = 0)
 {
     a[u].push_back({v, w});
     if(!dir)

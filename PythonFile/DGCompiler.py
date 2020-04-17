@@ -55,13 +55,11 @@ def changeLine():
 	mycode = ''
 	for line in f.readlines():
 		if line == str1:
-			print('fir : ' + line)
+			print('w --> a')
 			line = str2
-			print('fir : ' + line)
 		elif line == str2:
-			print('sec : ' + line)
+			print('a --> w')
 			line = str1
-			print('sec : ' + line)
 
 		mycode += line
 
@@ -70,7 +68,6 @@ def changeLine():
 	f = open(dg.path + '1.cpp', 'w')
 	f.write(mycode)
 	f.close()
-
 
 # changing cpp file to append mode(prefered for o/p)
 changeLine()

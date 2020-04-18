@@ -84,3 +84,27 @@ int primeFactorization(int n)
 
     return mul;
 }
+
+// nCr efficient method "without mod"
+int choose(int n, int r)
+{
+    int res, k;
+    if(r > n - r)
+        r = n - r;
+
+    k = res = 1;
+    while(r != 0)
+    {
+        res *= n;
+        k *= r;
+
+        int g = __gcd(res, k);
+
+        res /= g;
+        k /= g;
+
+        n--;
+        r--;
+    }
+    return res;
+}
